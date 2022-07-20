@@ -29,6 +29,7 @@ You can at any time check your quota with the command ```bih-gpfs-quota-user use
 
 Below is a set of instructions to install miniconda3, which is required to install Seurat and some other R dependencies.
 
+```
 # set up work/bin/ folder
 cd /fast/work/users/${USER}/ && mkdir bin/ && cd bin/
 
@@ -57,3 +58,4 @@ conda create -y -n r-sc r-seurat==4.1.1
 conda activate sc
 
 cd && ln -sr ~/work/bin/miniconda3/envs/r-sc/lib/R/library/ ~/R
+```

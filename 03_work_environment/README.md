@@ -41,7 +41,7 @@ conda upgrade --all
 y
 
 # modify conda repos 
-cd /data/gpfs-1/users/${USER} && nano .condarc
+cd && nano .condarc
 
 # copy and paste this into nano (CTRL+C here, right click to paste in nano)
 channels:
@@ -55,7 +55,5 @@ channel_priority: strict
 
 # create a conda environment called "r-sc" with the latest version of seurat
 conda create -y -n r-sc r-seurat==4.1.1
-conda activate sc
-
-cd && ln -sr ~/work/bin/miniconda3/envs/r-sc/lib/R/library/ ~/R
+conda activate r-sc
 ```

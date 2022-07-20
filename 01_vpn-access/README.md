@@ -1,5 +1,3 @@
-# Getting access to the Charite VPN
-
 1. **Fill in both VPN forms, 'vpn_antrag', and 'vpn_zusatzantrag_b'**  
 Print and sign both of these, scan them in and attach both files to an e-mail *sent from your charite e-mail address* to vpn@charite.de, with a subject line like 'surname, firstname, VPN access' Please also cc Chiara (chiara.romagnani@charite.de) so that they know you have permission.
 

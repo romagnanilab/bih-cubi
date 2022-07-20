@@ -7,4 +7,10 @@ Several support options are available if you run into errors (in order of what y
 1. The BIH-CUBI HPC [documents](https://bihealth.github.io/bih-cluster/)  
 2. Timo and Ollie  
 3. The BIH-CUBI HPC [blog](https://hpc-talk.cubi.bihealth.org/) for posting and helping with issues  
-4. The HPC helpdesk (hpc-helpdesk@bih-charite.de), explaining your problem according to [these guidelines](https://bihealth.github.io/bih-cluster/help/good-tickets/)
+4. The HPC helpdesk (hpc-helpdesk@bih-charite.de), explaining your problem according to [these guidelines](https://bihealth.github.io/bih-cluster/help/good-tickets/)  
+
+Things to add:  
+- ```slurm``` and ```sbatch``` guide for cellranger and other programs  
+- ```rclone``` replacement for data migration and archiving  
+- Etiquette for the ```ag_romagnani``` group folder  
+- Guides for kite, sequencing methods (base masks etc), understanding outs  

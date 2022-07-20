@@ -26,3 +26,34 @@ From here, how you set up your workspace is entirely your decision. However it i
 - Your ```work/``` folder has a hard quota of 1.1Tb and is for non-group personal use.
 - Finally, there is the ```/fast/groups/ag_romagnani/``` folder, where communal programs, scripts and reference genomes/files are kept.  
 You can at any time check your quota with the command ```bih-gpfs-quota-user user_c```
+
+Below is a set of instructions to install miniconda3, which is required to install Seurat and some other R dependencies.
+
+# set up work/bin/ folder
+cd /fast/work/users/${USER}/ && mkdir bin/ && cd bin/
+
+# download, install, and update miniconda 
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh -b -p miniconda3 && rm Miniconda3-latest-Linux-x86_64.sh
+source miniconda3/etc/profile.d/conda.sh && conda activate
+conda upgrade --all
+y
+
+# modify conda repos 
+cd /data/gpfs-1/users/${USER} && nano .condarc
+
+# copy and paste this into nano (CTRL+C here, right click to paste in nano)
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+show_channel_urls: true
+changeps1: false
+channel_priority: strict
+# close by CTRL+X and y and enter
+
+# create a conda environment called "r-sc" with the latest version of seurat
+conda create -y -n r-sc r-seurat==4.1.1
+conda activate sc
+
+cd && ln -sr ~/work/bin/miniconda3/envs/r-sc/lib/R/library/ ~/R

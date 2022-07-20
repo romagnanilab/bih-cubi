@@ -1,6 +1,8 @@
+If you have *any* issues with any of the steps below, feel free to ask Ollie (oliver.knight@charite.de) for help. You can also check out the BIH-CUBI cluster guide [here](https://bihealth.github.io/bih-cluster/) which may be helpful, too.
+
 **1. Applying for an HPC user account**  
 
-The below form must be filled in and forwarded to the named delegate (i.e. Oliver)
+The below form must be filled in and forwarded to the named delegate (i.e. oliver.knight@charite.de)
 
 ```
 - cluster: HPC 4 Research

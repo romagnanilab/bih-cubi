@@ -58,3 +58,4 @@ Host bihcluster2
     RequestTTY yes
 ```
 
+c. Then, you can simply type ```ssh bihcluster```, enter the password you set during **step 2** and connect into the login node. Proceed directly to the instructions in 03_work_environment

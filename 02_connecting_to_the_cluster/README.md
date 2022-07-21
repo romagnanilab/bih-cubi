@@ -41,7 +41,7 @@ f. Go to https://zugang.charite.de/ and log in as normal. Click on the blue butt
 
 **3. Connect to the cluster**  
 a. Type this:  
-```ssh-add ~/.ssh/mdc_id_rsa``  
+```ssh-add ~/.ssh/mdc_id_rsa```  
 
 b. Go to the ```~/.ssh/``` folder and create a new text file. paste the below in, adding your username and leaving the '_c', and save, *without* a file extension.  
 ```

@@ -40,7 +40,7 @@ e. Copy the contents; it should look something like
 f. Go to https://zugang.charite.de/ and log in as normal. Click on the blue button ```SSHKeys...```, paste the key from your ```.ssh/id_rsa.pub``` file, and click append.  
 
 **3. Connect to the cluster**  
-a. Type this:  
+a. Type
 ```ssh-add ~/.ssh/mdc_id_rsa```  
 
 b. Go to the ```~/.ssh/``` folder and create a new text file. paste the below in, adding your username and leaving the '_c', and save, *without* a file extension.  
@@ -60,4 +60,6 @@ Host bihcluster2
     RequestTTY yes
 ```
 
-c. Then, you can simply type ```ssh bihcluster```, enter the password you set during **step 2** and connect into the login node. Proceed directly to the instructions in [03_work_environment](https://github.com/romagnanilab/bih-cubi/tree/main/03_work_environment)
+c. Then, you can simply type   
+```ssh bihcluster```  
+Enter the password you set during **step 2** and connect into the login node. Proceed directly to the instructions in [03_work_environment](https://github.com/romagnanilab/bih-cubi/tree/main/03_work_environment)

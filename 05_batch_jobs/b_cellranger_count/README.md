@@ -1,8 +1,0 @@
-see above for examples
-
-gex_fb_count
-gex_fb_indices
-multi_count
-multi_indices
-multiome_count
-multiome_indices

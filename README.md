@@ -11,7 +11,6 @@ Several support options are available if you run into errors (in order of what y
 
 
 To do list:  
-- ```slurm``` and ```sbatch``` guide for cellranger and other programs  
 - ```rclone``` replacement for data migration and archiving  
 - Etiquette for the ```ag_romagnani``` group folder  
-- Guides for kite, sequencing methods (base masks etc), understanding outs  
+- Guides sequencing methods (base masks etc), understanding outs  

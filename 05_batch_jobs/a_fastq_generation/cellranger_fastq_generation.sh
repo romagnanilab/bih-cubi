@@ -40,6 +40,6 @@ outs_dir=/fast/scratch/users/$USER/$project_id
 
 #leave me alone
 
-cd $project_id
+cd data/$project_id
 
 cellranger mkfastq --id=${project_id}_fastq_${library_type} --run=$bcl_dir --csv=$scripts_dir/${library_type}_indices.csv --use-bases-mask=$bases_mask

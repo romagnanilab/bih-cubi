@@ -42,7 +42,7 @@ outs_dir=/fast/scratch/users/$USER/$project_id
 
 #leave me alone
 
-cd $project_id
+cd data/$project_id
 
 bcl2fastq --use-bases-mask=$bases_mask \
   --create-fastq-for-index-reads \

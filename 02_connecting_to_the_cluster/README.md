@@ -22,7 +22,10 @@ The below form must be filled in and forwarded to the named delegate (i.e. olive
 
 This will then be fowarded to hpc-gatekeeper@bihealth.de with you and Chiara in cc.
 
-**2. Creating a secure shell (ssh) key**
+**2. Go to Dashboard**
+Go [here](https://hpc-portal.cubi.bihealth.org/pun/sys/dashboard/) and login! proceed to 03, unless you want to perform the next steps too.
+
+**3. Creating a secure shell (ssh) key - ONLY IF YOU WANT TO DIRECTLY CONNECT THROUGH TERMINAL**
 
 a. Open terminal and type (ignore if on mac) 
 ```Get-Service -Name ssh-agent | Set-Service -StartupType Manual```  
@@ -39,7 +42,7 @@ e. Copy the contents; it should look something like
 
 f. Go to https://zugang.charite.de/ and log in as normal. Click on the blue button ```SSHKeys...```, paste the key from your ```.ssh/id_rsa.pub``` file, and click append.  
 
-**3. Connect to the cluster**  
+**4. Connect to the cluster**  
 a. Type
 ```ssh-add```  
 

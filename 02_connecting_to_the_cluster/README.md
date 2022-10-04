@@ -24,24 +24,24 @@ This will then be fowarded to hpc-gatekeeper@bihealth.de with you and Chiara in 
 
 **2. Creating a secure shell (ssh) key**
 
-a. Open terminal and type  
+a. Open terminal and type (ignore if on mac) 
 ```Get-Service -Name ssh-agent | Set-Service -StartupType Manual```  
 
 b. Type  
 ```ssh-keygen -t rsa -C "your_email@charite.de"``` # the quotation marks here stay in, they name your ssh key for future reference  
 
-c. Use the default location for storing your ssh key, and type any secure password in to store it.  
+c. Use the default location for storing your ssh key (just press enter), and type a secure password in to store it.  
 
-d. Locate the ```.ssh/id_rsa.pub``` file in your file explorer and open with notepad. You may need to enable the 'show hidden files and folders' setting in your control panel.  
+d. Locate the ```.ssh/id_rsa.pub``` file in your file explorer and open with notepad/textedit. You may need to enable the 'show hidden files and folders' setting in your control panel.  
 
 e. Copy the contents; it should look something like  
-```ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/Rdd5rvf4BT38jsBlRrXpd1KDvjE1iZZlEmkB6809QK7hV6RCG13VcyPTIHSQePycfcUv5q1Jdy28MpacL/nv1UR/o35xPBn2HkgB4OqnKtt86soCGMd9/YzQP5lY7V60kPBJbrXDApeqf+H1GALsFNQM6MCwicdE6zTqE1mzWVdhGymZR28hGJbV9H4snMDDc0tW4i3FHGrDdmb7wHM9THMx6OcCrnNyA9Sh2OyBH4MwItKfuqEg2rc56D7WAQ2JcmPQZTlBAYeFL/dYYKcXmbffEpXTbYh+7O0o9RAJ7T3uOUj/2IbSnsgg6fyw0Kotcg8iHAPvb61bZGPOEWZb your_email@charite.de```
+```ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/Rdd5rf4BT38jsBlRrXpd1KDvjE1iZZlEmkB6809QK7hV6RCG13VcyPTIHSQePycfcUv5q1Jdy28MpacL/nv1UR/o35xPBn2HkgB4OqnKtt86soCGMd9/YzQP5lY7V60kPBJbrXDApeqf+H1GALsFNQM6MCwicdE6zTqE1mzWVdhGymZR28hGJbVsnMDDc0tW4i3FHGrDdmb7wHM9THMx6OcCrnNyA9Sh2OyBH4MwItKfuqEg2rc56D7WAQ2JcmPQZTlBAYeFL/dYYKcXmbffEpXTbYh+7O0o9RAJ7T3uOUj/2IbSnsgg6fyw0Kotcg8iHAPvb61bZGPOEWZb your_email@charite.de```
 
 f. Go to https://zugang.charite.de/ and log in as normal. Click on the blue button ```SSHKeys...```, paste the key from your ```.ssh/id_rsa.pub``` file, and click append.  
 
 **3. Connect to the cluster**  
 a. Type
-```ssh-add ~/.ssh/mdc_id_rsa```  
+```ssh-add```  
 
 b. Go to the ```~/.ssh/``` folder and create a new text file. paste the below in, adding your username and leaving the '_c', and save, *without* a file extension.  
 ```

@@ -22,8 +22,8 @@ The below form must be filled in and forwarded to the named delegate (i.e. olive
 
 This will then be fowarded to hpc-gatekeeper@bihealth.de with you and Chiara in cc.
 
-**2. Go to Dashboard**
-Go [here](https://hpc-portal.cubi.bihealth.org/pun/sys/dashboard/) and login! proceed to 03, unless you want to perform the next steps too.
+**2. Go to Dashboard** If you have no interest in connecting directly through terminal, go [here](https://hpc-portal.cubi.bihealth.org/pun/sys/dashboard/) and login! Don't worry about any of the other steps on this page.
+  
 
 **3. Creating a secure shell (ssh) key - ONLY IF YOU WANT TO DIRECTLY CONNECT THROUGH TERMINAL**
 

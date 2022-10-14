@@ -1,4 +1,4 @@
-**1. Navigate to ```https://hpc-portal.cubi.bihealth.org/pun/sys/dashboard/```**  
+**1. Navigate to [this page](https://hpc-portal.cubi.bihealth.org/pun/sys/dashboard/)
 You must be connected to the Charite VPN to access this page
 
 **2. In the top bar, go to ```Interactive Apps``` then ```RStudio Server```**  
@@ -18,7 +18,7 @@ When you launch this, it will queue the request as it goes through the ```slurm`
 
 When you log in, and at the top of all your future scripts, make sure to explicitly tell R where your packages are installed, and will be installed in the future. This can be achieved with:  
 
-```.libPaths('/fast/work/users/${USER}/bin/miniconda3/envs/r-sc/lib/R/library/')```
+```.libPaths('/fast/work/groups/ag_romagnani/bin/miniconda3/envs/r-sc/lib/R/library/')```
 
 Going back to your terminal now, you will see two new folders in your home directory, ```ondemand``` and ```R```. Perform these steps to clean it all up:
 

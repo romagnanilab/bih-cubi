@@ -1,5 +1,4 @@
-**1. Navigate to [this page](https://hpc-portal.cubi.bihealth.org/pun/sys/dashboard/)
-You must be connected to the Charite VPN to access this page
+**1. Navigate to [this page](https://hpc-portal.cubi.bihealth.org/pun/sys/dashboard/).** You must be connected to the Charite VPN to access this page
 
 **2. In the top bar, go to ```Interactive Apps``` then ```RStudio Server```**  
 Here, you can customise the session you want.

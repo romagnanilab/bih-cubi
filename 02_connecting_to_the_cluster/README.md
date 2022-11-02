@@ -29,7 +29,7 @@ If you have no interest in connecting directly through terminal, go [here](https
 ***a. Work Windows***  
 Login with your username in this format: ```username@CHARITE```  
 
-b. Work Mac or personal computer/laptop
+***b. Work Mac or personal computer/laptop***  
 Login with your Charite credentials, nothing extra is required.  
 
 **3. Creating a secure shell (ssh) key - ONLY IF YOU WANT TO DIRECTLY CONNECT THROUGH TERMINAL**

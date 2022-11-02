@@ -22,10 +22,15 @@ The below form must be filled in and forwarded to the named delegate (i.e. olive
 
 This will then be fowarded to hpc-gatekeeper@bihealth.de with you and Chiara in cc.
 
-**2. Login to RStudio and terminal through browser**  
+**2. Login to the CUBI dashboard through your browser**  
 
 If you have no interest in connecting directly through terminal, go [here](https://hpc-portal.cubi.bihealth.org/pun/sys/dashboard/) and login! Don't worry about any of the other steps on this page.
-  
+
+***a. Work Windows***  
+Login with your username in this format: ```username@CHARITE```  
+
+b. Work Mac or personal computer/laptop
+Login with your Charite credentials, nothing extra is required.  
 
 **3. Creating a secure shell (ssh) key - ONLY IF YOU WANT TO DIRECTLY CONNECT THROUGH TERMINAL**
   

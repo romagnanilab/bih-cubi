@@ -1,4 +1,4 @@
-If you have *any* issues with any of the steps below, feel free to ask Ollie (oliver.knight@charite.de) for help. You can also check out the BIH-CUBI cluster guide [here](https://bihealth.github.io/bih-cluster/) which may be helpful, too.
+If you have *any* issues with any of the steps below, feel free to ask Ollie for help. You can also check out the BIH-CUBI cluster guide [here](https://bihealth.github.io/bih-cluster/).
 
 **1. Applying for an HPC user account**  
 
@@ -16,32 +16,29 @@ The below form must be filled in and forwarded to the named delegate (i.e. olive
     - [x] Charite
     - [ ] MDC
 - BIH/Charite/MDC user name: #this will be in the format surname+firstnameinitial without the plus
-- duration of cluster access (max 1 year): 
+- duration of cluster access (max 1 year): 1 year
 - AG: ag-romagnani
 ```
 
 This will then be fowarded to hpc-gatekeeper@bihealth.de with you and Chiara in cc.
 
-**2. Login to the CUBI dashboard through your browser**  
+**2. Login to the CUBI dashboard through your browser**   
 
-If you have no interest in connecting directly through terminal, go [here](https://hpc-portal.cubi.bihealth.org/pun/sys/dashboard/) and login! Don't worry about any of the other steps on this page.
-
+Go [here](https://hpc-portal.cubi.bihealth.org/pun/sys/dashboard/) here to log in to access the Dashboard.  
 ***a. Work Windows***  
 Login with your username in this format: ```username@CHARITE```  
 
 ***b. Work Mac or personal computer/laptop***  
-Login with your Charite credentials, nothing extra is required.  
+Login with your Charite credentials, i.e. ```username```
 
-**3. Creating a secure shell (ssh) key - ONLY IF YOU WANT TO DIRECTLY CONNECT THROUGH TERMINAL**
-  
-  
-a. Open terminal and type (ignore if on mac) 
-```Get-Service -Name ssh-agent | Set-Service -StartupType Manual```  
 
-b. Type  
-```ssh-keygen -t rsa -C "your_email@charite.de"``` # the quotation marks here stay in, they name your ssh key for future reference  
+<details>
+  <summary>Optional - terminal connection</summary>
+**3. Creating a secure shell (ssh) key**  
 
-c. Use the default location for storing your ssh key (just press enter), and type a secure password in to store it.  
+a. Type ```ssh-keygen -t rsa -C "your_email@charite.de"``` # leaving the quotation marks, enter your e-mail.  
+
+c. Use the default location for storing your ssh key (press enter), and type a secure password in to store it.  
 
 d. Locate the ```.ssh/id_rsa.pub``` file in your file explorer and open with notepad/textedit. You may need to enable the 'show hidden files and folders' setting in your control panel.  
 
@@ -74,3 +71,5 @@ Host bihcluster2
 c. Then, you can simply type   
 ```ssh bihcluster```  
 Enter the password you set during **step 2** and connect into the login node. Proceed directly to the instructions in [03_work_environment](https://github.com/romagnanilab/bih-cubi/tree/main/03_work_environment)
+
+</details>

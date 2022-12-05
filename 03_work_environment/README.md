@@ -1,21 +1,21 @@
-Upon connecting using the ```ssh bihcluster``` command through your terminal, you'll find yourself in a login node. **Do not** run anything here as there is limited RAM and CPU for anything, it is only intended for running ```tmux``` or ```screen``` sessions.  
+Upon connecting using the ```ssh bihcluster``` command, or through ```Clusters -> _cubi Shell Access``` on the Dashboard, you'll find yourself in a login node. **Do not** run anything here as there is limited RAM and CPU for anything, it is only intended for running ```tmux``` sessions.  
 
 **1. Creating an interactive session** 
 
-tmux and screen are essentially new windows for your command line. You can attach and detach these and they will run in the background even when you close your terminal window.  
+tmux is essentially a new window for your command line. You can attach and detach these and they will run in the background even when you close your terminal window.  
 
 To begin:
 ```
 tmux new -s cubi # create a new tmux session with the name 'cubi'
 ```
 
-You can detach this at any time by pressing CTRL+b, letting go, and pressing the d key. You can reattach at any time in 'base' command windows by typing ```tmux a -t cubi```  
+You can detach this at any time by pressing CTRL+b, letting go, and pressing the d key. You can reattach at any time in 'base' command windows by typing ```tmux a -t cubi```, or simply ```tmux a``` to attach your last accessed session.  
 
 Next, we will ask the workload managing system ```slurm``` to allocate us some cores and RAM.
 
-```srun -p long --time 7-00 --mem=32G --ntasks=16 --pty bash -i```  
+```srun -p medium --time 7-00 --mem=16G --ntasks=8 --pty bash -i```  
 
-This creates a session which will last 7 days, reserve 32Gb RAM, and 16 cores. From here, we can install software, packages, extract files and run programs.
+This creates a session which will last 7 days, reserve 16Gb RAM, and 8 cores. From here, we can install software, packages, extract files and run programs.
 
 **2. Setting up a workspace environment**
 
@@ -49,11 +49,14 @@ channels:
   - bioconda
   - defaults
 show_channel_urls: true
-changeps1: false
+changeps1: true
 channel_priority: strict
 # close by CTRL+X and y and enter
 
 # create a conda environment called "r-sc" with the latest version of seurat
-conda create -y -n r-sc r-seurat==4.1.1
+conda create -y -n r-sc r-seurat==4.2.0
 conda activate r-sc
-```
+```  
+
+If at any point you come into errors installing packages through RStudio directly, try using this format while in the ```r-sc``` conda environment:  
+```conda install -c conda-forge r-package```, replacing the word 'package' with what you want to install.

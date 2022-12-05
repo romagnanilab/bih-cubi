@@ -15,4 +15,4 @@ To do list:
 - Etiquette for the ```ag_romagnani``` group folder  
 - Guides sequencing methods (base masks etc), understanding outs  
 
-You probably want this >> **BIH [Dashboard](https://hpc-portal.cubi.bihealth.org/pun/sys/dashboard/)** <<
+You probably want this >> **[BIH Dashboard](https://hpc-portal.cubi.bihealth.org/pun/sys/dashboard/)** <<

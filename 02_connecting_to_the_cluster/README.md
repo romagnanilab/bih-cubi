@@ -34,6 +34,7 @@ Login with your Charite credentials, i.e. ```username```
 
 <details>
   <summary>Optional - terminal connection</summary>
+    
 **3. Creating a secure shell (ssh) key**  
 
 a. Type ```ssh-keygen -t rsa -C "your_email@charite.de"``` # leaving the quotation marks, enter your e-mail.  

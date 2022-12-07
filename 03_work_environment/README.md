@@ -54,7 +54,7 @@ channel_priority: strict
 # close by CTRL+X and y and enter
 
 # create a conda environment called "r-sc" with the latest version of seurat
-conda create -y -n r-sc r-seurat==4.2.0
+conda create -y -n r-sc r-seurat r-tidyverse r-devtools r-remotes
 conda activate r-sc
 ```  
 

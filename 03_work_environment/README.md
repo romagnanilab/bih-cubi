@@ -54,11 +54,11 @@ channel_priority: strict
 # close by CTRL+X and y and enter
 
 # create a conda environment called "r-sc" with the latest version of seurat
-conda create -y -n r-sc r-seurat r-tidyverse r-devtools r-remotes
+conda create -y -n r-sc python r-seurat r-hdf5r r-tidyverse r-devtools r-remotes
 conda activate r-sc
 
-
 remotes::install_github('satijalab/azimuth', ref = 'master')
+install.packages('R.utils')
 remotes::install_github('satijalab/seurat-wrappers')
 remotes::install_github("mojaveazure/seurat-disk")
 remotes::install_github("constantAmateur/SoupX")

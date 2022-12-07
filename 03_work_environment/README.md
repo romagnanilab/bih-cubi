@@ -56,6 +56,14 @@ channel_priority: strict
 # create a conda environment called "r-sc" with the latest version of seurat
 conda create -y -n r-sc r-seurat r-tidyverse r-devtools r-remotes
 conda activate r-sc
+
+
+remotes::install_github('satijalab/azimuth', ref = 'master')
+remotes::install_github('satijalab/seurat-wrappers')
+remotes::install_github("mojaveazure/seurat-disk")
+remotes::install_github("constantAmateur/SoupX")
+remotes::install_github("immunogenomics/harmony")
+BiocManager::install("scran")
 ```  
 
 If at any point you come into errors installing packages through RStudio directly, try using this format while in the ```r-sc``` conda environment:  

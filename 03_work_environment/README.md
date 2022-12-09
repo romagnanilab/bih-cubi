@@ -57,6 +57,8 @@ channel_priority: strict
 conda create -y -n r-sc r-seurat r-hdf5r r-devtools
 conda activate r-sc
 
+# install R packages, within R
+R
 remotes::install_github('satijalab/azimuth', ref = 'master')
 install.packages('R.utils')
 remotes::install_github('satijalab/seurat-wrappers')

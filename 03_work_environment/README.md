@@ -79,6 +79,7 @@ remotes::install_github('satijalab/seurat-wrappers')
 remotes::install_github("mojaveazure/seurat-disk")
 remotes::install_github("constantAmateur/SoupX")
 remotes::install_github("immunogenomics/harmony")
+remotes::install_github('chris-mcginnis-ucsf/DoubletFinder')
 BiocManager::install("scran")
 ```  
 

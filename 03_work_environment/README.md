@@ -55,7 +55,7 @@ channel_priority: strict
 
 # create a conda environment called "r-sc" with the latest version of seurat
 conda create -y -n sc r-tidyverse r-seurat r-hdf5r r-devtools
-conda activate r-sc
+conda activate sc
 ```
 
 # Temporary - due to issues with load packages
@@ -66,7 +66,7 @@ git clone https://github.com/bihealth/ood-bih-rstudio-server.git
 nano ~/work/bin/ondemand/dev/ood-bih-rstudio-server/template/script.sh.erb
 
 # under export LD_LIBRARY_PATH=/usr/lib64/:\$LD_LIBRARY_PATH, add:
-export LD_PRELOAD=/fast/work/users/{$USER}/bin/miniconda3/envs/r-sc/lib/libstdc++.so.6 
+export LD_PRELOAD=/fast/work/users/{$USER}/bin/miniconda3/envs/sc/lib/libstdc++.so.6 
 # save and close
 ```
 

@@ -13,21 +13,22 @@ You can detach this at any time by pressing CTRL+b, letting go, and pressing the
 
 Next, we will ask the workload managing system ```slurm``` to allocate us some cores and RAM.
 
-```srun -p medium --time 7-00 --mem=16G --ntasks=8 --pty bash -i```  
+```srun -p long --time 14-00 --ntasks=8 --mem=16G  --pty bash -i```  
 
-This creates a session which will last 7 days, reserve 16Gb RAM, and 8 cores. From here, we can install software, packages, extract files and run programs.
+This creates a session which will last 14 days, reserve 8 cores, and 16Gb RAM. From here, we can install software, packages, extract files and run programs.
 
 **2. Setting up a workspace environment**
 
 From here, how you set up your workspace is entirely your decision. However it important to understand how the file structure of the BIH-CUBI cluster is set up:
 
-- Your home directory, ```/data/gpfs-1/users/${USER}```, is only 1Gb in space and should not really contain anything other than *links* to other folders; already set up are ```/fast/scratch/users/${USER}``` and ```/fast/work/users/${USER}```.  
-- Your ```scratch/``` folder has a hard quota of 220Tb; however, files are deleted after 2 weeks from the time of their creation. This will be where large data such as sequencing runs and processing pipelines will work out of.
-- Your ```work/``` folder has a hard quota of 1.1Tb and is for non-group personal use.
+- Your home directory, ```/data/gpfs-1/users/${USER}```, or also sometimes written ```/fast/users/$USER``` is only 1Gb in space and should not contain anything other than *links* to other folders; already set up are ```/fast/scratch/users/${USER}``` and ```/fast/work/users/${USER}```.  
+- Your ```scratch/``` folder has a quota of 200 Tb; however, files are deleted after 2 weeks from the time of their creation. This will be where large data such as sequencing runs and processing pipelines will work out of. It is possible to ```touch``` files to keep them here longer.
+- Your ```work/``` folder has a hard quota of 1 Tb and is for non-group personal use.
 - Finally, there is the ```/fast/groups/ag_romagnani/``` folder, where communal programs, scripts and reference genomes/files are kept.  
+
 You can at any time check your quota with the command ```bih-gpfs-quota-user user_c```
 
-Below is a set of instructions to install miniconda3, which is required to install Seurat and some other R dependencies.
+Below is a set of instructions to install miniconda3, which is required to install Seurat and other R packages.
 
 ```
 # set up work/bin/ folder
@@ -54,11 +55,11 @@ channel_priority: strict
 # close by CTRL+X and y and enter
 
 # create a conda environment called "r-sc" with the latest version of seurat
-conda create -y -n sc r-tidyverse r-seurat r-hdf5r r-devtools
+conda create -y -n sc r-tidyverse r-hdf5r r-devtools r-seurat 
 conda activate sc
 ```
 
-# Temporary - due to issues with load packages
+## Temporary - due to issues with load packages
 
 ```
 mkdir ~/work/bin/ondemand/dev && cd ~/work/bin/ondemand/dev
@@ -84,4 +85,4 @@ BiocManager::install("scran")
 ```  
 
 If at any point you come into errors installing packages through RStudio directly, try using this format while in the ```r-sc``` conda environment:  
-```conda install -c conda-forge r-package```, replacing the word 'package' with what you want to install.
+```conda install r-package```, replacing the word 'package' with what you want to install. The 'r-' prefix indicates it's an ```R``` package, and not a python one.

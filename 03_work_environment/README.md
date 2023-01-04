@@ -71,11 +71,11 @@ export LD_PRELOAD=/fast/work/users/{$USER}/bin/miniconda3/envs/sc/lib/libstdc++.
 # save and close
 ```
 
-# install R packages, within R
+## Installing common R packages
 ```
 R
-remotes::install_github('satijalab/azimuth', ref = 'master')
 install.packages('R.utils')
+remotes::install_github('satijalab/azimuth', ref = 'master')
 remotes::install_github('satijalab/seurat-wrappers')
 remotes::install_github("mojaveazure/seurat-disk")
 remotes::install_github("constantAmateur/SoupX")

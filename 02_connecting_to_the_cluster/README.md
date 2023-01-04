@@ -25,12 +25,11 @@ This will then be fowarded to hpc-gatekeeper@bihealth.de with you and Chiara in 
 **2. Login to the CUBI dashboard through your browser**   
 
 Go [here](https://hpc-portal.cubi.bihealth.org/pun/sys/dashboard/) here to log in to access the Dashboard.  
-***a. Work Windows***  
+***a. Work computer Windows login***  
 Login with your username in this format: ```username@CHARITE```  
 
 ***b. Work Mac or personal computer/laptop***  
 Login with your Charite credentials, i.e. ```username```
-
 
 <details>
   <summary>Optional - terminal connection</summary>

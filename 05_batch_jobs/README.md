@@ -16,17 +16,15 @@ Below you will find the first part of this script, which ```slurm``` reads prior
 # Directory:
 #SBATCH -D /u/oknight/data/S6088
 
-# Node feature:
-#SBATCH --ntasks=72
-#SBATCH --mem=120000
+# Node features:
+#SBATCH --ntasks=64
+#SBATCH --mem=128000
 #SBATCH --mail-type=fail
 #SBATCH --mail-type=end
-#SBATCH --mail-user=oliver.knight@drfz.de
+#SBATCH --mail-user=oliver.knight@charite.de
 
 # wall clock limit:
-#SBATCH --time=24:00:00
+#SBATCH --time=6:00:00
 
-module purge
-
-export PATH=/u/oknight/bin/cellranger-6.1.2:$PATH
+export PATH=/u/oknight/bin/cellranger-7.0.0:$PATH
 ```

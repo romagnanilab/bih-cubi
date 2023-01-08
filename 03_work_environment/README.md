@@ -74,14 +74,16 @@ export LD_PRELOAD=/fast/work/users/{$USER}/bin/miniconda3/envs/sc/lib/libstdc++.
 ## Installing common R packages
 ```
 R
-install.packages('R.utils')
+install.packages('R.utils', 'showtext')
 remotes::install_github('satijalab/azimuth', ref = 'master')
 remotes::install_github('satijalab/seurat-wrappers')
 remotes::install_github("mojaveazure/seurat-disk")
 remotes::install_github("constantAmateur/SoupX")
 remotes::install_github("immunogenomics/harmony")
 remotes::install_github('chris-mcginnis-ucsf/DoubletFinder')
-BiocManager::install("scran")
+remotes::install_github("ayshwaryas/ddqc_R")
+BiocManager::install(c("scran","EnsDb.Hsapiens.v86", "GenomeInfoDb")
+install.packages("Signac")
 ```  
 
 If at any point you come into errors installing packages through RStudio directly, try using this format while in the ```r-sc``` conda environment:  

@@ -2,7 +2,7 @@
 
 ### Reticulate in R
 ```
-conda create -y -n r-reticulate numpy leidenalg umap-learn
+conda create -y -n r-reticulate numpy leidenalg umap-learn macs2
 conda activate r-reticulate
 ```
 
@@ -16,16 +16,11 @@ use_miniconda('/fast/work/users/$USER/bin/miniconda3/envs/r-reticulate/')
 ```
 Replacing ```$USER``` with your username.
 
-### Peak calling with MACS2
-```
-conda create -y -n peaks macs2
-conda activate peaks
-```
-And then in ```R```, calling ```macs2``` with
+And for MACS2 peaks calling:
 ```
 peaks <- CallPeaks(atac.seurat.object, assay = 'ATAC', macs2.path = '/fast/work/users/$USER/bin/miniconda3/envs/peaks/bin/macs2')
 ````
-Replacing ```$USER``` with your username.
+Replacing ```$USER``` with your username, again.
 
 ### Mitochondrial genotyping using ```mgatk```
 

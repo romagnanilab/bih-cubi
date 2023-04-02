@@ -55,7 +55,7 @@ channel_priority: strict
 # close by CTRL+X and y and enter
 
 # create a conda environment called "r-sc" with the latest version of seurat
-conda create -y -n sc r-tidyverse r-hdf5r r-devtools r-seurat 
+conda create -y -n sc r-tidyverse r-hdf5r r-devtools r-seurat r-signac
 conda activate sc
 ```
 
@@ -74,8 +74,8 @@ export LD_PRELOAD=/fast/work/users/{$USER}/bin/miniconda3/envs/sc/lib/libstdc++.
 ## Installing common R packages
 ```
 R
-install.packages(c('R.utils', 'showtext','Signac'))
-remotes::install_github('satijalab/azimuth', ref = 'master')
+install.packages(c('R.utils', 'showtext'))
+remotes::install_github('satijalab/azimuth')
 remotes::install_github('satijalab/seurat-wrappers')
 remotes::install_github("mojaveazure/seurat-disk")
 remotes::install_github("constantAmateur/SoupX")

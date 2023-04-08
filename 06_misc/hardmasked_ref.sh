@@ -1,4 +1,5 @@
-# Creating a mitochondrial-read-hardmasked reference```
+# Creating a mitochondrial-read-hardmasked reference
+
 ```
 mamba create -y -n sctools bedtools
 mamba activate sctools

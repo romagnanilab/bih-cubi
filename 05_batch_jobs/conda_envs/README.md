@@ -4,7 +4,7 @@
 
 ```
 mamba create -y -n sctools kallisto bustools numpy=1.21.0 pandas scipy statsmodels r-data.table r-matrix bioconductor-genomicranges bioconductor-summarizedexperiment java-jdk cellsnp-lite libgcc
-pip install mgatk
+pip install mgatk vireoSNP
 ```
 
 ### Reticulate in R

@@ -4,6 +4,7 @@
 
 ```
 mamba create -y -n sctools -c bih-cubi kallisto bustools numpy=1.21.0 pandas scipy statsmodels r-data.table r-matrix bioconductor-genomicranges bioconductor-summarizedexperiment java-jdk cellsnp-lite libgcc bcl2fastq2
+conda activate sctools
 pip install mgatk vireoSNP
 ```
 

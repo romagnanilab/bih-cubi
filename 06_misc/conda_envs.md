@@ -3,7 +3,7 @@
 ### Single cell annotation tools
 
 ```
-mamba create -y -n sctools kallisto bustools numpy=1.21.0 pandas scipy statsmodels r-data.table r-matrix bioconductor-genomicranges bioconductor-summarizedexperiment java-jdk cellsnp-lite libgcc
+mamba create -y -n sctools -c bih-cubi kallisto bustools numpy=1.21.0 pandas scipy statsmodels r-data.table r-matrix bioconductor-genomicranges bioconductor-summarizedexperiment java-jdk cellsnp-lite libgcc bcl2fastq2
 pip install mgatk vireoSNP
 ```
 

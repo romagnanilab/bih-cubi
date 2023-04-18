@@ -38,8 +38,6 @@ cd /fast/work/users/${USER}/ && mkdir bin/ && cd bin/
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh -b -p miniconda3 && rm Miniconda3-latest-Linux-x86_64.sh
 source miniconda3/etc/profile.d/conda.sh && conda activate
-conda upgrade --all
-y
 
 # modify conda repos 
 cd && nano .condarc
@@ -55,7 +53,8 @@ channel_priority: strict
 # close by CTRL+X and y and enter
 
 # create a conda environment called "r-sc" with the latest version of seurat
-conda create -y -n sc r-tidyverse r-hdf5r r-devtools r-seurat r-signac
+conda install mamba
+mamba create -y -n sc r-tidyverse r-hdf5r r-devtools r-seurat r-signac r-seuratdisk r-r.utils r-soupx r-harmony bioconductor-scran bioconductor-ensdb.hsapiens.v86 bioconductor-genomeinfodb
 conda activate sc
 ```
 
@@ -74,16 +73,10 @@ export LD_PRELOAD=/fast/work/users/{$USER}/bin/miniconda3/envs/sc/lib/libstdc++.
 ## Installing common R packages
 ```
 R
-install.packages(c('R.utils', 'showtext'))
 remotes::install_github('satijalab/azimuth')
 remotes::install_github('satijalab/seurat-wrappers')
-remotes::install_github("mojaveazure/seurat-disk")
-remotes::install_github("constantAmateur/SoupX")
-remotes::install_github("immunogenomics/harmony")
 remotes::install_github('chris-mcginnis-ucsf/DoubletFinder')
-remotes::install_github("ayshwaryas/ddqc_R")
-BiocManager::install(c("scran","EnsDb.Hsapiens.v86", "GenomeInfoDb"))
 ```  
 
 If at any point you come into errors installing packages through RStudio directly, try using this format while in the ```r-sc``` conda environment:  
-```conda install r-package```, replacing the word 'package' with what you want to install. The 'r-' prefix indicates it's an ```R``` package, and not a python one.
+```mamba install r-package```, replacing the word 'package' with what you want to install. The 'r-' prefix indicates it's an ```R``` package, and not a python one.

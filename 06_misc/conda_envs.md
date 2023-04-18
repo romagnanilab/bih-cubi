@@ -11,8 +11,8 @@ pip install vireoSNP
 ### Mitochondrial genotyping
 
 ```
-mamba create -y -n mtgak -c openjdk r-data.table r-matrix bioconductor-genomicranges bioconductor-summarizedexperiment
-conda activate mtgak
+mamba create -y -n mito openjdk r-data.table r-matrix bioconductor-genomicranges bioconductor-summarizedexperiment
+conda activate mito
 pip install mgatk
 ```
 

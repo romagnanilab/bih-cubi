@@ -3,10 +3,19 @@
 ### Single cell annotation tools
 
 ```
-mamba create -y -n sctools -c bih-cubi kallisto bustools numpy=1.21.0 pandas scipy statsmodels r-data.table r-matrix bioconductor-genomicranges bioconductor-summarizedexperiment java-jdk cellsnp-lite libgcc bcl2fastq2
+mamba create -y -n sctools -c bih-cubi kallisto bustools numpy=1.21.0 pandas scipy statsmodels openjdk cellsnp-lite bcl2fastq2
 conda activate sctools
-pip install mgatk vireoSNP
+pip install vireoSNP
 ```
+
+### Mitochondrial genotyping
+
+```
+mamba create -y -n mito openjdk r-data.table r-matrix bioconductor-genomicranges bioconductor-summarizedexperiment
+conda activate mito
+pip install mgatk
+```
+
 
 ### Reticulate in R
 ```

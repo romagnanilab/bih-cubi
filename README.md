@@ -1,7 +1,14 @@
-# Introduction to the repository  
-The Romagnani lab is moving from the DRFZ work server to the [Berlin Institute of Health-Core Bioinformatics Unit (BIH-CUBI) High Performance Computing (HPC) cluster](https://www.hpc.bihealth.org/). This allows several advantages including more storage space, faster workloads, and more flexible and shared analysis pipelines.  
+# BIH-CUBI HPC Guide
 
-During the move Ollie will help move data from the DRFZ server using the ```rclone``` package. Move your data onto /scratch/ and he'll move it over. An alternative method will soon be found to move from from the datastore to the BIH-CUBI cluster, and *vice versa*.
+The Romagnani lab works on the [Berlin Institute of Health-Core Bioinformatics Unit (BIH-CUBI) High Performance Computing (HPC) cluster](https://www.hpc.bihealth.org/) for bioinformatics analyses. This allows several advantages including more storage space, faster workloads, and more flexible and shared analysis pipelines.  
+
+Access to the >> **[BIH Dashboard](https://hpc-portal.cubi.bihealth.org/pun/sys/dashboard/)** <<
+
+## Cheat commands you might like:
+`wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh`  
+`bash Miniconda3-latest-Linux-x86_64.sh -b -p miniconda3 && rm Miniconda3-latest-Linux-x86_64.sh`  
+`srun --time 1-00 --ntasks=8 --mem=16G  --pty bash -i`
+
 
 Several support options are available if you run into errors (in order of what you should check first):  
 1. The BIH-CUBI HPC [documents](https://bihealth.github.io/bih-cluster/)  
@@ -14,5 +21,3 @@ To do list:
 - ```rclone``` replacement for data migration and archiving  
 - Etiquette for the ```ag_romagnani``` group folder  
 - Guides sequencing methods (base masks etc), understanding outs  
-
-You probably want this >> **[BIH Dashboard](https://hpc-portal.cubi.bihealth.org/pun/sys/dashboard/)** <<

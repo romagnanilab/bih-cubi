@@ -1,9 +1,9 @@
 # Contents
 
-**[01 VPN access and requesting an account](https://github.com/ollieeknight/bih-cubi/edit/main/01_first_time_connecting/README.md#01-vpn-access-and-requesting-an-account-1)**  
-**[02 Connecting to the cluster](https://github.com/ollieeknight/bih-cubi/edit/main/01_first_time_connecting/README.md#02-connecting-to-the-cluster)**  
-**[03 Setting up your work environment](https://github.com/ollieeknight/bih-cubi/edit/main/01_first_time_connecting/README.md#03-setting-up-your-work-environment)**  
-**[04 Setting up an RStudio session](https://github.com/ollieeknight/bih-cubi/edit/main/01_first_time_connecting/README.md#04-setting-up-an-rstudio-session)**  
+**[01 VPN access and requesting an account](https://github.com/ollieeknight/bih-cubi/tree/main/01_first_time_connecting#01-vpn-access-and-requesting-an-account)**  
+**[02 Connecting to the cluster](https://github.com/ollieeknight/bih-cubi/tree/main/01_first_time_connecting#02-connecting-to-the-cluster)**  
+**[03 Setting up your work environment](https://github.com/ollieeknight/bih-cubi/tree/main/01_first_time_connecting#03-setting-up-your-work-environment)**  
+**[04 Setting up an RStudio session](https://github.com/ollieeknight/bih-cubi/tree/main/01_first_time_connecting#04-setting-up-an-rstudio-session)**  
 
 
 # 01 VPN access and requesting an account

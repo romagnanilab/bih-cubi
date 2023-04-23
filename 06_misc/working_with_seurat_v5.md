@@ -2,9 +2,9 @@
 ```
 mamba create -n sc_v5 r-tidyverse r-hdf5r r-devtools r-seurat r-r.utils
 remotes::install_github("mojaveazure/seurat-object", "seurat5")
-devtools::install_github("satijalab/seurat", "seurat5")
+remotes::install_github("mojaveazure/seurat-disk", "feat/h5ad)
 devtools::install_github("satijalab/seurat-data", "seurat5")
-remotes::install_github("mojaveazure/seurat-disk")
+devtools::install_github("satijalab/seurat", "seurat5")
 devtools::install_github("satijalab/azimuth", "seurat5")
-remotes::install_github("stuart-lab/signac", "seurat5", quiet = TRUE)
+remotes::install_github("stuart-lab/signac", "seurat5")
 ```

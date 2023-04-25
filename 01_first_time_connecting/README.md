@@ -148,6 +148,9 @@ changeps1: true
 channel_priority: strict
 # close by CTRL+X and y and enter
 
+conda upgrade --all 
+y
+
 # create a conda environment called "r-sc" with the latest version of seurat
 conda install mamba
 mamba create -y -n sc r-tidyverse r-hdf5r r-devtools r-seurat r-signac

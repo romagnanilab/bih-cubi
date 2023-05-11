@@ -1,9 +1,9 @@
 # Contents
 
-**[01 VPN access and requesting an account](https://github.com/ollieeknight/bih-cubi/edit/main/01_first_time_connecting/README.md#01-vpn-access-and-requesting-an-account-1)**  
-**[02 Connecting to the cluster](https://github.com/ollieeknight/bih-cubi/edit/main/01_first_time_connecting/README.md#02-connecting-to-the-cluster)**  
-**[03 Setting up your work environment](https://github.com/ollieeknight/bih-cubi/edit/main/01_first_time_connecting/README.md#03-setting-up-your-work-environment)**  
-**[04 Setting up an RStudio session](https://github.com/ollieeknight/bih-cubi/edit/main/01_first_time_connecting/README.md#04-setting-up-an-rstudio-session)**  
+**01 [VPN access and requesting an account](https://github.com/ollieeknight/bih-cubi/tree/main/01_first_time_connecting#01-vpn-access-and-requesting-an-account)**  
+**02 [Connecting to the cluster](https://github.com/ollieeknight/bih-cubi/tree/main/01_first_time_connecting#02-connecting-to-the-cluster)**  
+**03 [Setting up your work environment](https://github.com/ollieeknight/bih-cubi/tree/main/01_first_time_connecting#03-setting-up-your-work-environment)**  
+**04 [Setting up an RStudio session](https://github.com/ollieeknight/bih-cubi/tree/main/01_first_time_connecting#04-setting-up-an-rstudio-session)**  
 
 
 # 01 VPN access and requesting an account
@@ -148,13 +148,50 @@ changeps1: true
 channel_priority: strict
 # close by CTRL+X and y and enter
 
+conda upgrade --all 
+y
+
 # create a conda environment called "r-sc" with the latest version of seurat
 conda install mamba
-mamba create -y -n sc r-tidyverse r-hdf5r r-devtools r-seurat r-signac r-seuratdisk r-r.utils r-soupx r-harmony bioconductor-scran bioconductor-ensdb.hsapiens.v86 bioconductor-genomeinfodb
+mamba create -y -n sc r-tidyverse r-hdf5r r-devtools r-seurat r-signac
 conda activate sc
+mamba install r-seuratdisk r-r.utils r-soupx r-harmony bioconductor-scran bioconductor-ensdb.hsapiens.v86 bioconductor-genomeinfodb
 ```
 
-## Temporary - due to issues with load packages
+If at any point you come into errors installing packages through RStudio directly, try using this format while in the ```sc``` conda environment:  
+```mamba install r-package```, replacing the word 'package' with what you want to install. The 'r-' prefix indicates it's an ```R``` package, and not a python one.
+
+# 04 Setting up an RStudio session
+
+**1. Navigate to [this page](https://hpc-portal.cubi.bihealth.org/pun/sys/dashboard/).** You must be connected to the Charite VPN to access this page
+
+**2. In the top bar, go to ```Interactive Apps``` then ```RStudio Server (Sandbox)```**. It's important you choose the *Sandbox* RStudio server due to some ongoing package loading issues with the OnDemand platform.
+
+From here, you can customise the session you want.
+
+**R source:** change to miniconda  
+**Miniconda path:** ~/bin/miniconda3/bin:sc  
+**Singularity image:** *leave as is*  
+**Number of cores:** Maximum 32
+**Memory [GiB]:** Maximum 128  
+**Running time [days]:** Maximum 14, recommended 1  
+**Partition to run in:** medium
+
+When you launch this, it will queue the request as it goes through the ```slurm``` workload manager. It will then automatically update when it is running, and you can launch the session. If it is taking too long, reduce the cores, memory, and running time. 16 cores, 64 Gb RAM, and 1 day often works well.
+
+**3.** Close the R session, and go back to your terminal. You should see two new folders in your home directory, ```ondemand``` and ```R```. Perform these steps:
+
+```
+cd # change to home directory
+ls # to check where you are
+mv ondemand work/bin/ && ln -s ~/work/bin/ondemand ondemand
+
+rm -r R && ln -s ~/work/bin/miniconda3/envs/sc/lib/R/library/ R # only if there is an 'R' folder, ignore this line if not
+mv ondemand work/bin && ln -s work/bin/ondemand ondemand
+```
+Immediately follow the next step.
+
+## Temporary - due to issues with load packages  
 
 ```
 mkdir ~/work/bin/ondemand/dev && cd ~/work/bin/ondemand/dev
@@ -173,35 +210,3 @@ remotes::install_github('satijalab/azimuth')
 remotes::install_github('satijalab/seurat-wrappers')
 remotes::install_github('chris-mcginnis-ucsf/DoubletFinder')
 ```  
-
-If at any point you come into errors installing packages through RStudio directly, try using this format while in the ```r-sc``` conda environment:  
-```mamba install r-package```, replacing the word 'package' with what you want to install. The 'r-' prefix indicates it's an ```R``` package, and not a python one.
-
-# 04 Setting up an RStudio session
-
-**1. Navigate to [this page](https://hpc-portal.cubi.bihealth.org/pun/sys/dashboard/).** You must be connected to the Charite VPN to access this page
-
-**2. In the top bar, go to ```Interactive Apps``` then ```RStudio Server (Sandbox)```**. It's important you choose the *Sandbox* RStudio server due to some ongoing package loading issues with the OnDemand platform.
-
-From here, you can customise the session you want.
-
-**R source:** miniconda  
-**Miniconda path:** ~/bin/miniconda3/bin:sc  
-**Singularity image:** *leave as is*  
-**Number of cores:** Maximum 64, recommended 16  
-**Memory [GiB]:** Maximum 128  
-**Running time [days]:** Maximum 14  
-**Partition to run in:** long  
-
-When you launch this, it will queue the request as it goes through the ```slurm``` workload manager. It will then automatically update when it is running, and you can launch the session. If it is taking too long, reduce the cores, memory, and running time. 16 cores, 64 Gb RAM, and 1 day often works well.
-
-**3. Close** the R session, and go back to your terminal. You should see two new folders in your home directory, ```ondemand``` and ```R```. Perform these steps:
-
-```
-cd # change to home directory
-ls # to check
-mv ondemand work/bin/ && ln -s ~/work/bin/ondemand ondemand
-
-rm -r R && ln -s ~/work/bin/miniconda3/envs/sc/lib/R/library/ R
-```
-

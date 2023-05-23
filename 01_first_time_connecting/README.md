@@ -1,12 +1,12 @@
 # Contents
 
-**01 [VPN access and requesting an account](https://github.com/ollieeknight/bih-cubi/tree/main/01_first_time_connecting#01-vpn-access-and-requesting-an-account)**  
-**02 [Connecting to the cluster](https://github.com/ollieeknight/bih-cubi/tree/main/01_first_time_connecting#02-connecting-to-the-cluster)**  
-**03 [Setting up your work environment](https://github.com/ollieeknight/bih-cubi/tree/main/01_first_time_connecting#03-setting-up-your-work-environment)**  
-**04 [Setting up an RStudio session](https://github.com/ollieeknight/bih-cubi/tree/main/01_first_time_connecting#04-setting-up-an-rstudio-session)**  
+**[VPN access and requesting an account](https://github.com/ollieeknight/bih-cubi/tree/main/01_first_time_connecting#vpn-access-and-requesting-an-account)**  
+**[Connecting to the cluster](https://github.com/ollieeknight/bih-cubi/tree/main/01_first_time_connecting#connecting-to-the-cluster)**  
+**[Setting up your work environment](https://github.com/ollieeknight/bih-cubi/tree/main/01_first_time_connecting#setting-up-your-work-environment)**  
+**[Setting up an RStudio session](https://github.com/ollieeknight/bih-cubi/tree/main/01_first_time_connecting#setting-up-an-rstudio-session)**  
 
 
-# 01 VPN access and requesting an account
+# VPN access and requesting an account
 
 1. **Fill in both VPN forms,** ```vpn_antrag.pdf```**, and** ```vpn_zusatzantrag_b.pdf```  
 Print and sign both of these, scan them in and attach both files to an e-mail *sent from your charite e-mail address* to vpn@charite.de, with a subject line such as 'surname, firstname, VPN access'. Please also cc Chiara (chiara.romagnani@charite.de) so that the VPN gatekeepers know you have group leader-authorised permission.
@@ -38,9 +38,9 @@ The below form must be filled in and forwarded to the named delegate (i.e. olive
 
 This will then be fowarded to hpc-gatekeeper@bihealth.de with you and Chiara in cc.
 
-# 02 Connecting to the cluster
+# Connecting to the cluster
 
-**2. Login to the CUBI dashboard through your browser**   
+**1. Login to the CUBI dashboard through your browser**   
 
 Go [here](https://hpc-portal.cubi.bihealth.org/pun/sys/dashboard/) here to log in to access the Dashboard.  
 ***a. Work computer Windows login***  
@@ -52,7 +52,7 @@ Login with your Charite credentials, i.e. ```username```
 <details>
   <summary>Optional - terminal connection</summary>
     
-**3. Creating a secure shell (ssh) key**  
+**2. Creating a secure shell (ssh) key**  
 
 a. Type ```ssh-keygen -t rsa -C "your_email@charite.de"``` # leaving the quotation marks, enter your e-mail.  
 
@@ -92,7 +92,7 @@ Enter the password you set during **step 2** and connect into the login node. Pr
 
 </details>
 
-# 03 Setting up your work environment
+# Setting up your work environment
 
 Upon connecting using the ```ssh bihcluster``` command, or through ```Clusters -> _cubi Shell Access``` on the Dashboard, you'll find yourself in a login node. **Do not** run anything here as there is limited RAM and CPU for anything, it is only intended for running ```tmux``` sessions.  
 
@@ -109,7 +109,7 @@ You can detach this at any time by pressing CTRL+b, letting go, and pressing the
 
 Next, we will ask the workload managing system ```slurm``` to allocate us some cores and RAM.
 
-```srun --time 1-00 --ntasks=8 --mem=16G  --pty bash -i```  
+```srun --time 1-00 --ntasks 8 --mem 16G  --pty bash -i```  
 
 This creates a session which will last 1 day, reserve 8 cores, and 16Gb RAM. From here, we can install software, packages, extract files and run programs.
 
@@ -151,48 +151,19 @@ channel_priority: strict
 conda upgrade --all 
 y
 
-# create a conda environment called "r-sc" with the latest version of seurat
+# create a conda environment called "sc_R" with the latest version of seurat
 conda install mamba
-mamba create -y -n sc r-tidyverse r-hdf5r r-devtools r-seurat r-signac
-conda activate sc
-mamba install r-seuratdisk r-r.utils r-soupx r-harmony bioconductor-scran bioconductor-ensdb.hsapiens.v86 bioconductor-genomeinfodb
+mamba create -y -n sc_R r-tidyverse r-hdf5r r-devtools r-seurat r-signac
+conda activate sc_R
+mamba install r-seuratdisk r-r.utils r-harmony bioconductor-scran bioconductor-ensdb.hsapiens.v86 bioconductor-genomeinfodb
 ```
 
-If at any point you come into errors installing packages through RStudio directly, try using this format while in the ```sc``` conda environment:  
-```mamba install r-package```, replacing the word 'package' with what you want to install. The 'r-' prefix indicates it's an ```R``` package, and not a python one.
+Here, we make a folder called `bin` in your work directory, and then download and install miniconda. We install a `conda` alternative named `mamba`, which is much faster to create and install environments and packages. We then use it to create our R environment named `sc_R', but you can name this whatever you want.
 
-# 04 Setting up an RStudio session
+If at any point you come into errors installing packages through RStudio directly, try using this format while in the `sc_R` conda environment: `mamba install r-package`, replacing the word 'package' with what you want to install. The 'r-' prefix indicates it's an `R` package, and not a python one.
 
-**1. Navigate to [this page](https://hpc-portal.cubi.bihealth.org/pun/sys/dashboard/).** You must be connected to the Charite VPN to access this page
-
-**2. In the top bar, go to ```Interactive Apps``` then ```RStudio Server (Sandbox)```**. It's important you choose the *Sandbox* RStudio server due to some ongoing package loading issues with the OnDemand platform.
-
-From here, you can customise the session you want.
-
-**R source:** change to miniconda  
-**Miniconda path:** ~/bin/miniconda3/bin:sc  
-**Singularity image:** *leave as is*  
-**Number of cores:** Maximum 32
-**Memory [GiB]:** Maximum 128  
-**Running time [days]:** Maximum 14, recommended 1  
-**Partition to run in:** medium
-
-When you launch this, it will queue the request as it goes through the ```slurm``` workload manager. It will then automatically update when it is running, and you can launch the session. If it is taking too long, reduce the cores, memory, and running time. 16 cores, 64 Gb RAM, and 1 day often works well.
-
-**3.** Close the R session, and go back to your terminal. You should see two new folders in your home directory, ```ondemand``` and ```R```. Perform these steps:
-
-```
-cd # change to home directory
-ls # to check where you are
-mv ondemand work/bin/ && ln -s ~/work/bin/ondemand ondemand
-
-rm -r R && ln -s ~/work/bin/miniconda3/envs/sc/lib/R/library/ R # only if there is an 'R' folder, ignore this line if not
-mv ondemand work/bin && ln -s work/bin/ondemand ondemand
-```
-Immediately follow the next step.
-
-## Temporary - due to issues with load packages  
-
+# Setting up an RStudio session
+In terminal, perform:  
 ```
 mkdir ~/work/bin/ondemand/dev && cd ~/work/bin/ondemand/dev
 git clone https://github.com/bihealth/ood-bih-rstudio-server.git
@@ -200,8 +171,38 @@ nano ~/work/bin/ondemand/dev/ood-bih-rstudio-server/template/script.sh.erb
 
 # under export LD_LIBRARY_PATH=/usr/lib64/:\$LD_LIBRARY_PATH, add:
 export LD_PRELOAD=/fast/work/users/{$USER}/bin/miniconda3/envs/sc/lib/libstdc++.so.6 
-# save and close
+# save and close with CTRL + X, Y and enter
 ```
+
+**1. Navigate to [this page](https://hpc-portal.cubi.bihealth.org/pun/sys/dashboard/).** You must be connected to the Charite VPN to access this page
+
+**2. In the top bar, go to `Interactive Apps` then the red `RStudio Server (Sandbox)`** button. It's important you choose the *Sandbox* RStudio server due to some ongoing package loading issues with the OnDemand platform.
+
+From here, you can customise the session you want.
+
+```
+**R source:** change to miniconda  
+**Miniconda path:** ~/bin/miniconda3/bin:sc_R  
+**Singularity image:** *leave as is*  
+**Number of cores:** Maximum 32
+**Memory [GiB]:** Maximum 128  
+**Running time [days]:** Maximum 14, recommended 1  
+**Partition to run in:** medium
+```
+
+When you launch this, it will queue the request as it goes through the `slurm` workload manager. It will then automatically update when it is running, and you can launch the session. If it is taking too long, reduce the cores, memory, and running time. 16 cores, 64 Gb RAM, and 1 day often works well.
+
+**3.** Close the R session, and go back to your terminal. You should see two new folders in your home directory, `ondemand` and `R`. Perform these steps:
+
+```
+cd # change to home directory
+ls # to check where you are
+mv .config work/bin/ && ln -s ~/work/bin/.config .config
+mv .cache work/bin/ && ln -s ~/work/bin/.cache .cache
+mv .local work/bin/ && ln -s ~/work/bin/.local .local
+mv ondemand work/bin/ && ln -s ~/work/bin/ondemand ondemand
+```
+This creates symbolic links which moves certain default directories to a place where you have more space to do so.
 
 ## Installing common R packages
 ```

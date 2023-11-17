@@ -1,27 +1,21 @@
 # BIH-CUBI HPC Guide
 
-The Romagnani lab works on the [Berlin Institute of Health-Core Bioinformatics Unit (BIH-CUBI) High Performance Computing (HPC) cluster](https://www.hpc.bihealth.org/) for bioinformatics analyses. This allows several advantages including more storage space, faster workloads, and more flexible and shared analysis pipelines.  
+The Romagnani lab works on the [Berlin Institute of Health-Core Bioinformatics Unit (BIH-CUBI) High Performance Computing (HPC) cluster](https://www.hpc.bihealth.org/) for bioinformatics analyses.
 
-Access to the >> **[BIH Dashboard](https://hpc-portal.cubi.bihealth.org/pun/sys/dashboard/)** <<
+For RStudio and JupterLab, go to the >> **[BIH Dashboard](https://hpc-portal.cubi.bihealth.org/pun/sys/dashboard/)** <<
 
-## Cheat commands you might like:
-`wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh`  
-`bash Miniconda3-latest-Linux-x86_64.sh -b -p miniconda3 && rm Miniconda3-latest-Linux-x86_64.sh`  
-`srun --time 1-00 --ntasks=8 --mem=16G  --pty bash -i`
-
-
-Several support options are available if you run into errors (in order of what you should check first):  
+If you run into trouble using any part of the HPC, heres an order of where to look for guidance:  
 1. The BIH-CUBI HPC [documents](https://bihealth.github.io/bih-cluster/)  
-2. Timo and Ollie  
-3. The BIH-CUBI HPC [blog](https://hpc-talk.cubi.bihealth.org/) for posting and helping with issues  
+2. Ollie  
+3. The BIH-CUBI HPC [question board](https://hpc-talk.cubi.bihealth.org/) for posting and helping with issues  
 4. The HPC helpdesk (hpc-helpdesk@bih-charite.de), explaining your problem according to [these guidelines](https://bihealth.github.io/bih-cluster/help/good-tickets/)  
 
 # Contents
 
-**[VPN access and requesting an account](https://github.com/ollieeknight/bih-cubi/tree/main/01_first_time_connecting#vpn-access-and-requesting-an-account)**  
-**[Connecting to the cluster](https://github.com/ollieeknight/bih-cubi/tree/main/01_first_time_connecting#connecting-to-the-cluster)**  
-**[Setting up your work environment](https://github.com/ollieeknight/bih-cubi/tree/main/01_first_time_connecting#setting-up-your-work-environment)**  
-**[Setting up an RStudio session](https://github.com/ollieeknight/bih-cubi/tree/main/01_first_time_connecting#setting-up-an-rstudio-session)**  
+**[VPN access and requesting an account]()**  
+**[Connecting to the cluster]()**  
+**[Setting up your work environment]()**  
+**[Setting up an RStudio session]()**  
 
 
 # VPN access and requesting an account
@@ -145,18 +139,19 @@ You can at any time check your quota with the command ```bih-gpfs-quota-user use
 Below is a set of instructions to install miniconda3, which is required to install Seurat and other R packages.
 
 ```
-# set up work/bin/ folder
+# link the group folder, and set up your work/bin/ folder
+ln -s /fast/work/groups/ag_romagnani/ group
 cd /fast/work/users/${USER}/ && mkdir bin/ && cd bin/
 
 # download, install, and update miniconda 
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-bash Miniconda3-latest-Linux-x86_64.sh -b -p miniconda3 && rm Miniconda3-latest-Linux-x86_64.sh
-source miniconda3/etc/profile.d/conda.sh && conda activate
+curl -L https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh -o Mambaforge-Linux-x86_64.sh
+bash Mambaforge-Linux-x86_64.sh -b -p ~/work/bin/mambaforge && rm Mambaforge-Linux-x86_64.sh
+source mambaforge/etc/profile.d/conda.sh && conda activate
 
 # modify conda repos 
 cd && nano .condarc
 
-# copy and paste this into nano (CTRL+C here, right click to paste in nano)
+# copy and paste this into nano (CTRL+C here, right click to paste)
 channels:
   - conda-forge
   - bioconda
@@ -166,14 +161,9 @@ changeps1: true
 channel_priority: strict
 # close by CTRL+X and y and enter
 
-conda upgrade --all 
-y
+mamba upgrade --all -y
 
-# create a conda environment called "sc_R" with the latest version of seurat
-conda install mamba
-mamba create -y -n sc_R r-tidyverse r-hdf5r r-devtools r-seurat r-signac
-conda activate sc_R
-mamba install r-seuratdisk r-r.utils r-harmony bioconductor-scran bioconductor-ensdb.hsapiens.v86 bioconductor-genomeinfodb
+mamba env create -n #your_env_name_here -f ~/group/work/ref/seurat/sc_R.yml
 ```
 
 Here, we make a folder called `bin` in your work directory, and then download and install miniconda. We install a `conda` alternative named `mamba`, which is much faster to create and install environments and packages. We then use it to create our R environment named `sc_R', but you can name this whatever you want.

@@ -26,7 +26,7 @@ Print and sign both of these, scan them in and attach both files to an e-mail *s
 2. **For personal computer access, install OpenVPN and configure your connection**  
 Refer to either installation on macOS (```vpn_macOS_installation.pdf```) or Windows (```vpn_Windows_installation.pdf```)
 
-If you have *any* issues with any of the steps below, feel free to ask Ollie for help. You can also check out the BIH-CUBI cluster guide [here](https://bihealth.github.io/bih-cluster/).
+If you have any issues with any of the steps below, feel free to ask Ollie for help. You can also check out the BIH-CUBI cluster guide [here](https://bihealth.github.io/bih-cluster/).
 
 3. **Applying for an HPC user account**  
 
@@ -129,12 +129,12 @@ This creates a session which will last 1 day, reserve 8 cores, and 16Gb RAM. Fro
 
 From here, how you set up your workspace is entirely your decision. However it important to understand how the file structure of the BIH-CUBI cluster is set up:
 
-- Your home directory, ```/data/gpfs-1/users/${USER}```, or also sometimes written ```/fast/users/$USER``` is only 1Gb in space and should not contain anything other than *links* to other folders; already set up are ```/fast/scratch/users/${USER}``` and ```/fast/work/users/${USER}```.  
-- Your ```scratch/``` folder has a quota of 200 Tb; however, files are deleted after 2 weeks from the time of their creation. This will be where large data such as sequencing runs and processing pipelines will work out of. It is possible to ```touch``` files to keep them here longer.
-- Your ```work/``` folder has a hard quota of 1 Tb and is for non-group personal use.
+- Your home directory, ```~/```, or also sometimes written ```/fast/users/$USER```, is only 1Gb in space and should not contain anything other than *links* to other folders; already set up are ```/fast/scratch/users/${USER}``` and ```/fast/work/users/${USER}```.  
+- Your ```~/scratch``` folder has a quota of 200 Tb; however, files are deleted after 2 weeks from the time of their creation. This will be where large data such as sequencing runs and processing pipelines will work out of.
+- Your ```~/work``` folder has a hard quota of 1 Tb and is for non-group personal use.
 - Finally, there is the ```/fast/groups/ag_romagnani/``` folder, where communal programs, scripts and reference genomes/files are kept.  
 
-You can at any time check your quota with the command ```bih-gpfs-quota-user user_c```
+You can at any time check your quota with the command ```bih-gpfs-quota-user $USER```
 
 Below is a set of instructions to install miniconda3, which is required to install Seurat and other R packages.
 
@@ -166,19 +166,19 @@ mamba upgrade --all -y
 mamba env create -n #your_env_name_here -f ~/group/work/ref/seurat/sc_R.yml
 ```
 
-Here, we make a folder called `bin` in your work directory, and then download and install miniconda. We install a `conda` alternative named `mamba`, which is much faster to create and install environments and packages. We then use it to create our R environment named `sc_R', but you can name this whatever you want.
+Here, we make a folder called `bin` in your work directory, and then download and install miniconda. We install a `conda` alternative named `mamba`, which is much faster to create and install environments and packages. We then use it to create our R environment named `sc_R`, but you can name this whatever you want.
 
-If at any point you come into errors installing packages through RStudio directly, try using this format while in the `sc_R` conda environment: `mamba install r-package`, replacing the word 'package' with what you want to install. The 'r-' prefix indicates it's an `R` package, and not a python one.
+If at any point you come into errors installing packages through RStudio directly, try using this format while in the `sc_R` conda environment: `mamba install r-package`, replacing the word 'package' with what you want to install. The 'r-' prefix indicates it's an `R` package, and not a `python` one.
 
 # Setting up an RStudio session
 In terminal, perform:  
 ```
-mkdir ~/work/bin/ondemand/dev && cd ~/work/bin/ondemand/dev
+mkdir -p ~/work/bin/ondemand/dev && cd ~/work/bin/ondemand/dev
 git clone https://github.com/bihealth/ood-bih-rstudio-server.git
 nano ~/work/bin/ondemand/dev/ood-bih-rstudio-server/template/script.sh.erb
 
 # under export LD_LIBRARY_PATH=/usr/lib64/:\$LD_LIBRARY_PATH, add:
-export LD_PRELOAD=/fast/work/users/{$USER}/bin/miniconda3/envs/sc/lib/libstdc++.so.6 
+export LD_PRELOAD=/fast/work/users/$USER/bin/miniconda3/envs/sc/lib/libstdc++.so.6 
 # save and close with CTRL + X, Y and enter
 ```
 
@@ -190,7 +190,7 @@ From here, you can customise the session you want.
 
 ```
 **R source:** change to miniconda  
-**Miniconda path:** ~/bin/miniconda3/bin:sc_R  
+**Miniconda path:** ~/bin/mambaforge/bin:sc_R # or whatever you named the environment to be
 **Singularity image:** *leave as is*  
 **Number of cores:** Maximum 32
 **Memory [GiB]:** Maximum 128  
@@ -212,7 +212,7 @@ mv ondemand work/bin/ && ln -s ~/work/bin/ondemand ondemand
 ```
 This creates symbolic links which moves certain default directories to a place where you have more space to do so.
 
-## Installing common R packages
+## Some common R packages
 ```
 R
 remotes::install_github('satijalab/azimuth')

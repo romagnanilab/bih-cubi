@@ -217,6 +217,7 @@ This creates symbolic links which moves certain default directories to a place w
 ## Some common R packages
 ```
 R
+remotes::install_github("eddelbuettel/harmony",force = TRUE)
 remotes::install_github('satijalab/azimuth')
 remotes::install_github('satijalab/seurat-wrappers')
 remotes::install_github('chris-mcginnis-ucsf/DoubletFinder')

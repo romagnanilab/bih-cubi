@@ -144,9 +144,9 @@ ln -s /fast/work/groups/ag_romagnani/ group
 cd /fast/work/users/${USER}/ && mkdir bin/ && cd bin/
 
 # download, install, and update miniconda 
-curl -L https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh -o Mambaforge-Linux-x86_64.sh
-bash Mambaforge-Linux-x86_64.sh -b -p ~/work/bin/mambaforge && rm Mambaforge-Linux-x86_64.sh
-source mambaforge/etc/profile.d/conda.sh && conda activate
+curl -L https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -o Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh -b -p ~/work/bin/miniconda3 && rm Miniconda3-latest-Linux-x86_64.sh
+source miniconda3/etc/profile.d/conda.sh && conda activate
 
 # modify conda repos 
 cd && nano .condarc
@@ -161,9 +161,11 @@ changeps1: true
 channel_priority: strict
 # close by CTRL+X and y and enter
 
-mamba upgrade --all -y
+conda install -y -n base conda-libmamba-solver
+conda config --set solver libmamba
+conda upgrade --all -y
 
-mamba env create -n #your_env_name_here -f ~/group/work/ref/seurat/sc_R.yml
+conda env create -n #your_env_name_here -f ~/group/work/ref/seurat/sc_R.yml
 ```
 
 Here, we make a folder called `bin` in your work directory, and then download and install miniconda. We install a `conda` alternative named `mamba`, which is much faster to create and install environments and packages. We then use it to create our R environment named `sc_R`, but you can name this whatever you want.
@@ -190,7 +192,7 @@ From here, you can customise the session you want.
 
 ```
 **R source:** change to miniconda  
-**Miniconda path:** ~/bin/mambaforge/bin:sc_R # or whatever you named the environment to be
+**Miniconda path:** ~/bin/miniconda3/bin:sc_R # or whatever you named the environment to be
 **Singularity image:** *leave as is*  
 **Number of cores:** Maximum 32
 **Memory [GiB]:** Maximum 128  

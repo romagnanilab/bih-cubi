@@ -165,7 +165,12 @@ conda install -y -n base conda-libmamba-solver
 conda config --set solver libmamba
 conda upgrade --all -y
 
-conda env create -n #your_env_name_here -f ~/group/work/ref/seurat/sc_R.yml
+conda create -y -n sc_R r-base=4.2.3 r-tidyverse r-hdf5r r-devtools r-seurat r-signac r-r.utils bioconductor-ensdb.hsapiens.v86 bioconductor-genomeinfodb
+conda install -y bioconductor-motifmatchr bioconductor-jaspar2022 bioconductor-tfbstools bioconductor-chromvar
+conda install r-pals r-ggsci r-ggthemes r-ggdensity r-showtext r-ggtext
+remotes::install_github(c('satijalab/seurat', 'satijalab/azimuth', 'satijalab/seurat-wrappers', 'satijalab/seurat-data', "eddelbuettel/harmony"), force = T)
+BiocManager::install("JASPAR2024")
+
 ```
 
 Here, we make a folder called `bin` in your work directory, and then download and install miniconda. We install a `conda` alternative named `mamba`, which is much faster to create and install environments and packages. We then use it to create our R environment named `sc_R`, but you can name this whatever you want.

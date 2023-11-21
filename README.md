@@ -162,7 +162,7 @@ channels:
   - defaults
 show_channel_urls: true
 changeps1: true
-channel_priority: strict
+channel_priority: flexible
 # close by CTRL+X and y and enter
 
 conda upgrade --all -y
@@ -171,7 +171,6 @@ conda config --set solver libmamba
 
 conda create -y -n R_sc_analysis r-base=4.2.3 r-tidyverse r-hdf5r r-devtools r-r.utils r-pals r-ggsci r-ggthemes r-showtext r-ggtext
 conda activate R_sc_analysis
-conda install -y bioconductor-ensdb.hsapiens.v86 bioconductor-genomeinfodb bioconductor-motifmatchr bioconductor-tfbstools bioconductor-chromvar
 ```
 
 
@@ -179,6 +178,7 @@ conda install -y bioconductor-ensdb.hsapiens.v86 bioconductor-genomeinfodb bioco
 # then in R
 remotes::install_github(c('satijalab/seurat', 'stuart-lab/signac', 'satijalab/azimuth', 'satijalab/seurat-wrappers', 'satijalab/seurat-data', 'chris-mcginnis-ucsf/DoubletFinder', 'eddelbuettel/harmony'), force = T)
 BiocManager::install("JASPAR2023")
+conda install -y bioconductor-ensdb.hsapiens.v86 bioconductor-genomeinfodb bioconductor-motifmatchr bioconductor-tfbstools bioconductor-chromvar
 
 ```
 

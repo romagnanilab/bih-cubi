@@ -145,14 +145,14 @@ Below is a set of instructions to install miniconda3, which is required to insta
 ```bash
 # link the group folder, and set up your work/bin/ folder
 ln -s /fast/work/groups/ag_romagnani/ group
-cd /fast/work/users/${USER}/ && mkdir bin/ && cd bin/
+mkdir ~/work/bin/ && cd ~/work/bin/
 
 # download, install, and update miniconda 
 curl -L https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -o Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh -b -p ~/work/bin/miniconda3 && rm Miniconda3-latest-Linux-x86_64.sh
 source miniconda3/etc/profile.d/conda.sh && conda activate
 
-# modify conda repos 
+# modify conda repositories  
 nano ~/.condarc
 
 # copy and paste this into nano (CTRL+C here, right click to paste)
@@ -166,25 +166,24 @@ channel_priority: flexible
 # close by CTRL+X and y and enter
 
 conda upgrade --all -y
-conda install -y -n base conda-libmamba-solver
 conda config --set solver libmamba
 
-conda create -y -n R_sc_analysis r-base=4.2.3 r-tidyverse r-hdf5r r-devtools r-r.utils r-pals r-ggsci r-ggthemes r-showtext r-ggtext
-conda activate R_sc_analysis
+conda create -y -n sc_R r-base=4.2.3 r-tidyverse r-biocmanager r-hdf5r r-devtools r-r.utils r-pals r-ggsci r-ggthemes r-showtext r-ggtext r-xml
+conda activate sc_R
+conda install r-base=4.2.3 bioconductor-motifmatchr bioconductor-tfbstools bioconductor-chromvar bioconductor-bsgenome.hsapiens.ucsc.hg38 bioconductor-ensdb.hsapiens.v86
 ```
 
 
 ```R
 # then in R
 remotes::install_github(c('satijalab/seurat', 'stuart-lab/signac', 'satijalab/azimuth', 'satijalab/seurat-wrappers', 'satijalab/seurat-data', 'chris-mcginnis-ucsf/DoubletFinder', 'eddelbuettel/harmony'), force = T)
-BiocManager::install("JASPAR2023")
-conda install -y bioconductor-ensdb.hsapiens.v86 bioconductor-genomeinfodb bioconductor-motifmatchr bioconductor-tfbstools bioconductor-chromvar
-
+remotes::install_github('Bioconductor/BiocFileCache')
+BiocManager::install('JASPAR2022')
 ```
 
-Here, we make a folder called `bin` in your work directory, and then download and install miniconda. We then use it to create our R environment named `R_sc_analysis`, but you can name this whatever you want.
+Here, we make a folder called `bin` in your work directory, and then download and install miniconda. We then use it to create our R environment named `sc_R`, but you can name this whatever you want.
 
-If at any point you come into errors installing packages through RStudio directly, try using this format while in the `R_sc_analysis` conda environment: `conda install r-package`, replacing the word 'package' with what you want to install. The 'r-' prefix indicates it's an `R` package, and not a `python` one.
+If at any point you come into errors installing packages through RStudio directly, try using this format while in the `sc_R` conda environment: `conda install r-package`, replacing the word 'package' with what you want to install. The 'r-' prefix indicates it's an `R` package, and not a `python` one.
 
 # Setting up an RStudio session
 In terminal, perform:  
@@ -194,7 +193,7 @@ git clone https://github.com/bihealth/ood-bih-rstudio-server.git
 nano ~/work/bin/ondemand/dev/ood-bih-rstudio-server/template/script.sh.erb
 
 # under export LD_LIBRARY_PATH=/usr/lib64/:\$LD_LIBRARY_PATH, add:
-export LD_PRELOAD=/fast/work/users/$USER/bin/miniconda3/envs/sc/lib/libstdc++.so.6 
+export LD_PRELOAD=/fast/work/users/$USER/bin/miniconda3/envs/sc_R/lib/libstdc++.so.6 
 # save and close with CTRL + X, Y and enter
 ```
 
@@ -206,7 +205,7 @@ From here, you can customise the session you want:
 
 ```
 **R source:** change to miniconda  
-**Miniconda path:** ~/bin/miniconda3/bin:R_sc_analysis # or whatever you named the environment to be
+**Miniconda path:** ~/bin/miniconda3/bin:sc_R # or whatever you named the environment to be
 **Singularity image:** *leave as is*  
 **Number of cores:** Maximum 32
 **Memory [GiB]:** Maximum 128  

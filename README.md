@@ -168,9 +168,9 @@ channel_priority: flexible
 conda upgrade --all -y
 conda config --set solver libmamba
 
-conda create -y -n sc_R r-base=4.2.3 r-tidyverse r-biocmanager r-hdf5r r-devtools r-r.utils r-pals r-ggsci r-ggthemes r-showtext r-ggtext r-xml r-ggpubr r-ggridges r-ggtext r-ggh4x
+conda create -y -n sc_R r-base=4.2.3 r-tidyverse r-biocmanager r-hdf5r r-devtools r-r.utils r-pals r-ggsci r-ggthemes r-showtext r-ggtext r-xml r-ggpubr r-ggridges r-ggtext r-ggh4x r-enrichr
 conda activate sc_R
-conda install r-base=4.2.3 bioconductor-motifmatchr bioconductor-tfbstools bioconductor-chromvar bioconductor-bsgenome.hsapiens.ucsc.hg38 bioconductor-ensdb.hsapiens.v86
+conda install r-base=4.2.3 bioconductor-motifmatchr bioconductor-tfbstools bioconductor-chromvar bioconductor-bsgenome.hsapiens.ucsc.hg38 bioconductor-ensdb.hsapiens.v86 bioconductor-deseq2
 ```
 
 

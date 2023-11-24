@@ -176,7 +176,7 @@ conda install r-base=4.2.3 bioconductor-motifmatchr bioconductor-tfbstools bioco
 
 ```R
 # then in R
-remotes::install_github(c('satijalab/seurat', 'stuart-lab/signac', 'satijalab/azimuth', 'satijalab/seurat-wrappers', 'satijalab/seurat-data', 'chris-mcginnis-ucsf/DoubletFinder', 'carmonalab/UCell', 'eddelbuettel/harmony'), force = T)
+remotes::install_github(c('satijalab/seurat', 'stuart-lab/signac', 'satijalab/azimuth', 'satijalab/seurat-wrappers', 'satijalab/seurat-data', 'chris-mcginnis-ucsf/DoubletFinder', 'TomKellyGenetics/leiden', 'carmonalab/UCell', 'eddelbuettel/harmony'), force = T)
 remotes::install_github('Bioconductor/BiocFileCache')
 BiocManager::install('JASPAR2022')
 ```

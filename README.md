@@ -5,9 +5,9 @@ The Romagnani lab uses the [Berlin Institute of Health-Core Bioinformatics Unit 
 For RStudio and JupterLab, go to the >> **[BIH Dashboard](https://hpc-portal.cubi.bihealth.org/pun/sys/dashboard/)** <<
 
 If you run into trouble using any part of the HPC, heres an order of where to look for guidance:  
-1. The BIH-CUBI HPC [documents](https://bihealth.github.io/bih-cluster/)  
-2. Ollie  
-3. The BIH-CUBI HPC [question board](https://hpc-talk.cubi.bihealth.org/) for posting and helping with issues  
+1. The BIH-CUBI HPC [documents](https://bihealth.github.io/bih-cluster/)
+2. The BIH-CUBI HPC [question board](https://hpc-talk.cubi.bihealth.org/) for posting and helping with issues  
+3. Ollie  
 4. The HPC helpdesk (hpc-helpdesk@bih-charite.de), explaining your problem according to [these guidelines](https://bihealth.github.io/bih-cluster/help/good-tickets/)  
 
 # Contents

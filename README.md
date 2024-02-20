@@ -219,9 +219,10 @@ mv ondemand work/bin/ && ln -s $HOME/work/bin/ondemand ondemand
 ```
 This creates symbolic links which moves certain default directories to a place where you have more space to do so.
 
+
 **5.** Finallising our R environment, we move back to ondemand, launch a session once more, and perform these steps:
 
-
 ```R
+update.packages(ask = FALSE, checkBuilt = TRUE)
 remotes::install_github(c('satijalab/azimuth', 'satijalab/seurat-data', 'chris-mcginnis-ucsf/DoubletFinder', 'TomKellyGenetics/leiden', 'carmonalab/UCell'), force = T)
 ```

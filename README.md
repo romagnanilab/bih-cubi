@@ -82,7 +82,7 @@ f. Go to https://zugang.charite.de/ and log in as normal. Click on the blue butt
 **4. Connect to the cluster**  
 a. Type `ssh-add`  
 
-b. Go to the `~/.ssh/` folder and create a new text file. paste the below in, adding your username and leaving the '_c', and save, *without* a file extension.  
+b. Go to the `$HOME/.ssh/` folder and create a new text file. paste the below in, adding your username and leaving the '_c', and save, *without* a file extension.  
 ```bash
 Host bihcluster
     ForwardAgent yes
@@ -123,18 +123,18 @@ You can detach this at any time by pressing CTRL+b, letting go, and pressing the
 Next, we will ask the workload managing system `slurm` to allocate us some cores and RAM.
 
 ```bash
-srun --time 1-00 --ntasks 8 --mem 16G  --pty bash -i
+srun --time 24:00:00 --ntasks 16 --mem 32G --immediate=1200 --pty bash -i
 ```  
 
-This creates a session which will last 1 day, reserve 8 cores, and 16Gb RAM. From here, we can install software, packages, extract files and run programs.
+This creates a session which will last 24h, allow you to use 16 CPU cores, and 32Gb RAM. From here, we can install software, packages, extract files and run programs.
 
 **2. Setting up a workspace environment**
 
 From here, how you set up your workspace is entirely your decision. However the file structure of the BIH-CUBI cluster is set up like this:
 
-- Your home directory, `~/`, or also sometimes written `/fast/users/$USER`, is only 1Gb in space and should not contain anything other than *links* to other folders; already set up are `/fast/scratch/users/${USER}` and `/fast/work/users/${USER}`. You can always check wherever you are with `pwd`.  
-- Your `~/scratch` folder has a quota of 200 Tb; however, files are deleted after 2 weeks from the time of their creation. This will be where large data such as sequencing runs and processing pipelines are run.
-- Your `~/work` folder has a hard quota of 1 Tb and is for non-group personal use.
+- Your home directory, `$HOME/`, or also sometimes written `/fast/users/$USER`, is only 1Gb in space and should not contain anything other than *links* to other folders; already set up are `/fast/scratch/users/${USER}` and `/fast/work/users/${USER}`. You can always check wherever you are with `pwd`.  
+- Your `$HOME/scratch` folder has a quota of 200 Tb; however, files are deleted after 2 weeks from the time of their creation. This will be where large data such as sequencing runs and processing pipelines are run.
+- Your `$HOME/work` folder has a hard quota of 1 Tb and is for non-group personal use.
 - Finally, there is the `/fast/groups/ag_romagnani/` folder, where communal programs, scripts and reference genomes/files are kept.  
 
 You can at any time check your quota with the command `bih-gpfs-quota-user $USER`
@@ -144,15 +144,15 @@ Below is a set of instructions to install miniconda3, which is required to insta
 ```bash
 # link the group folder, and set up your work/bin/ folder
 ln -s /fast/work/groups/ag_romagnani/ group
-mkdir ~/work/bin/ && cd ~/work/bin/
+mkdir $HOME/work/bin/ && cd $HOME/work/bin/
 
 # download, install, and update miniconda 
 curl -L https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -o Miniconda3-latest-Linux-x86_64.sh
-bash Miniconda3-latest-Linux-x86_64.sh -b -p ~/work/bin/miniconda3 && rm Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/work/bin/miniconda3 && rm Miniconda3-latest-Linux-x86_64.sh
 source miniconda3/etc/profile.d/conda.sh && conda activate
 
 # modify conda repositories  
-nano ~/.condarc
+nano $HOME/.condarc
 
 # copy and paste this into nano (CTRL+C here, right click to paste)
 channels:
@@ -161,24 +161,16 @@ channels:
   - defaults
 show_channel_urls: true
 changeps1: true
-channel_priority: flexible
+channel_priority: strict
 # close by CTRL+X and y and enter
 
 conda upgrade --all -y
 conda config --set solver libmamba
 
 # If you'd like to make a conda env now for single cell analysis in R, run these steps:  
-conda create -y -n sc_R r-base=4.2.3 r-tidyverse r-biocmanager r-hdf5r r-devtools r-r.utils r-pals r-ggsci r-ggthemes r-showtext r-ggtext r-xml r-ggpubr r-ggridges r-ggtext r-ggh4x r-enrichr
+conda create -n sc_R r-base=4.2.3 r-tidyverse r-biocmanager r-hdf5r r-devtools r-r.utils r-seurat r-signac r-leiden r-matrix r-pals r-ggsci r-ggthemes r-showtext r-ggtext r-ggpubr r-ggridges r-ggtext r-ggh4x
 conda activate sc_R
-conda install r-base=4.2.3 bioconductor-motifmatchr bioconductor-tfbstools bioconductor-chromvar bioconductor-bsgenome.hsapiens.ucsc.hg38 bioconductor-ensdb.hsapiens.v86 bioconductor-deseq2
-```
-
-
-```R
-# Here are some more useful packages, but run this in R:
-remotes::install_github(c('satijalab/seurat', 'stuart-lab/signac', 'satijalab/azimuth', 'satijalab/seurat-wrappers', 'satijalab/seurat-data', 'chris-mcginnis-ucsf/DoubletFinder', 'TomKellyGenetics/leiden', 'carmonalab/UCell', 'eddelbuettel/harmony'), force = T)
-remotes::install_github('Bioconductor/BiocFileCache')
-BiocManager::install('JASPAR2022')
+conda install r-base=4.2.3 bioconductor-motifmatchr bioconductor-tfbstools bioconductor-chromvar bioconductor-bsgenome.hsapiens.ucsc.hg38 bioconductor-ensdb.hsapiens.v86 bioconductor-deseq2 bioconductor-limma r-harmony bioconductor-jaspar2022 bioconductor-biocfilecache
 ```
 
 In the above script, we make a folder called `bin` in your work directory, and then download and install miniconda. We then use it to create our R environment named `sc_R`, but you can name this whatever you want.
@@ -188,9 +180,9 @@ If at any point you come into errors installing packages through RStudio directl
 # Setting up an RStudio session
 In terminal, perform:  
 ```bash
-mkdir -p ~/work/bin/ondemand/dev && cd ~/work/bin/ondemand/dev
+mkdir -p $HOME/work/bin/ondemand/dev && cd $HOME/work/bin/ondemand/dev
 git clone https://github.com/bihealth/ood-bih-rstudio-server.git
-nano ~/work/bin/ondemand/dev/ood-bih-rstudio-server/template/script.sh.erb
+nano $HOME/work/bin/ondemand/dev/ood-bih-rstudio-server/template/script.sh.erb
 
 # under export LD_LIBRARY_PATH=/usr/lib64/:\$LD_LIBRARY_PATH, add:
 export LD_PRELOAD=/fast/work/users/$USER/bin/miniconda3/envs/sc_R/lib/libstdc++.so.6 
@@ -203,9 +195,9 @@ export LD_PRELOAD=/fast/work/users/$USER/bin/miniconda3/envs/sc_R/lib/libstdc++.
 
 From here, you can customise the session you want:
 
-```
+```bash
 **R source:** change to miniconda  
-**Miniconda path:** ~/bin/miniconda3/bin:sc_R # or whatever you named the environment to be
+**Miniconda path:** $HOME/bin/miniconda3/bin:sc_R # or whatever you named the environment to be
 **Singularity image:** *leave as is*  
 **Number of cores:** Maximum 32
 **Memory [GiB]:** Maximum 128  
@@ -217,12 +209,19 @@ When you launch this, it will queue the request as it goes through the `slurm` w
 
 **3.** Close the R session, and go back to your terminal. You should see two new folders in your home directory, `ondemand` and `R`. Perform these steps:
 
-```
+```bash
 cd # change to home directory
 ls # to check where you are
-mv .config work/bin/ && ln -s ~/work/bin/.config .config
-mv .cache work/bin/ && ln -s ~/work/bin/.cache .cache
-mv .local work/bin/ && ln -s ~/work/bin/.local .local
-mv ondemand work/bin/ && ln -s ~/work/bin/ondemand ondemand
+mv .config work/bin/ && ln -s $HOME/work/bin/.config .config
+mv .cache work/bin/ && ln -s $HOME/work/bin/.cache .cache
+mv .local work/bin/ && ln -s $HOME/work/bin/.local .local
+mv ondemand work/bin/ && ln -s $HOME/work/bin/ondemand ondemand
 ```
 This creates symbolic links which moves certain default directories to a place where you have more space to do so.
+
+**5.** Finallising our R environment, we move back to ondemand, launch a session once more, and perform these steps:
+
+
+```R
+remotes::install_github(c('satijalab/azimuth', 'satijalab/seurat-data', 'chris-mcginnis-ucsf/DoubletFinder', 'TomKellyGenetics/leiden', 'carmonalab/UCell'), force = T)
+```

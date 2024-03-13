@@ -1,4 +1,4 @@
-#!/bin/bash/
+#!/bin/bash
 
 bin_folder=${HOME}/work/bin
 mkdir -p ${bin_folder}
@@ -44,13 +44,9 @@ channel_priority: flexible' > ${HOME}/.condarc
 
     source ${bin_folder}/miniconda3/etc/profile.d/conda.sh
 
-    conda activate
-
     conda upgrade --all -y
     conda config --set solver libmamba
 
-elif [ "$choice" = "N" ] || [ "$choice" = "n" ]; then
-    :
 fi
 
 echo "Do you want to create R_4.2.3? (y/newname/n)"
@@ -75,7 +71,7 @@ elif [[ $choice == "newname" ]]; then
     echo "Enter the name for the new environment:"
     read -r env_name
 
-    cp "$environent" "${TMPDIR}/${env_name}.yml"
+    cp "$environment" "${TMPDIR}/${env_name}.yml"
 
     echo ""
     echo "Creating a new environment named '${env_name}' for RStudio..."

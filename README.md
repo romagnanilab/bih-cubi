@@ -74,7 +74,7 @@ d. Locate the `.ssh/id_rsa.pub` file in your file explorer and open with notepad
 
 e. Copy the contents; it should look something like  
 ```
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/Rdd5rf4BT38jsBrXpd1vjE1iZZlEmkB6809QK7hV6RCG13VcyPTIHSQePycfcUv5q1Jdy28MpacL/nv1UR/o35xPBn2HkgB4OqnKtt86soCGMd9/YzQP5lY7V60kPBJbrXDApeqf+H1GALsFNQM6MCwicdE6zTqE1mzWVdhGymZR28hGJbVsnMDDc0tW4i3FHGrDdmb7wHM9THMx6OcCrnNyA9Sh2OyBH4MwItKfuqEg2rc56D7WAQ2JcmPQZTlBAYeFL/dYYKcXmbffEpXTbYh+7O0o9RAJ7T3uOUj/2IbSnsgg6fyw0Kotcg8iHAPvb61bZGPOEWZb your_email@charite.de
+ssh-rsa AAAAAB3NzaC1yc2EAAAADAQABAAABAQC/Rdd5rf4BT38jsBrXpd1vjE1iZZlEmkB6809QK7hV6RCG13VcyPTIHSQePycfcUv5q1Jdy28MpacL/nv1UR/o35xPBn2HkgB4OqnKtt86soCGMd9/YzQP5lY7V60kPBJbrXDApeqf+H1GALsFNQM6MCwicdE6zTqE1mzWVdhGymZR28hGJbVsnMDDc0tW4i3FHGrDdmb7wHM9THMx6OcCrnNyA9Sh2OyBH4MwItKfuqEg2rc56D7WAQ2JcmPQZTlBAYeFL/dYYKcXmbffEpXTbYh+7O0o9RAJ7T3uOUj/2IbSnsgg6fyw0Kotcg8iHAPvb61bZGPOEWZb your_email@charite.de
 ```
 
 f. Go to https://zugang.charite.de/ and log in as normal. Click on the blue button `SSHKeys...`, paste the key from your `.ssh/id_rsa.pub` file, and click append.  
@@ -142,6 +142,12 @@ You can at any time check your quota with the command `bih-gpfs-quota-user $USER
 Below is a set of instructions to install miniconda3, which is required to install Seurat and other R packages.
 
 ```bash
+
+mv ${HOME}/.config work/bin/ && ln -s $HOME/work/bin/.config .config
+mv ${HOME}/.cache work/bin/ && ln -s $HOME/work/bin/.cache .cache
+mv ${HOME}/.local work/bin/ && ln -s $HOME/work/bin/.local .local
+mv ${HOME}/ondemand work/bin/ && ln -s $HOME/work/bin/ondemand ondemand
+
 # link the group folder, and set up your work/bin/ folder
 ln -s /fast/work/groups/ag_romagnani/ group
 mkdir $HOME/work/bin/ && cd $HOME/work/bin/
@@ -149,7 +155,7 @@ mkdir $HOME/work/bin/ && cd $HOME/work/bin/
 # download, install, and update miniconda 
 curl -L https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -o Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/work/bin/miniconda3 && rm Miniconda3-latest-Linux-x86_64.sh
-source miniconda3/etc/profile.d/conda.sh && conda activate
+source ${HOME}/work/bin/miniconda3/etc/profile.d/conda.sh && conda activate
 
 # modify conda repositories  
 nano $HOME/.condarc
@@ -158,19 +164,23 @@ nano $HOME/.condarc
 channels:
   - conda-forge
   - bioconda
+  - bih-cubi
   - defaults
 show_channel_urls: true
 changeps1: true
-channel_priority: strict
+channel_priority: flexible
 # close by CTRL+X and y and enter
 
 conda upgrade --all -y
 conda config --set solver libmamba
 
 # If you'd like to make a conda env now for single cell analysis in R, run these steps:  
-conda create -n R_4.2.3 r-base=4.2.3 r-tidyverse r-biocmanager r-hdf5r r-devtools r-r.utils r-seurat r-signac r-leiden r-matrix r-pals r-ggsci r-ggthemes r-showtext r-ggtext r-ggpubr r-ggridges r-ggtext r-ggh4x
+conda create -n R_4.2.3 r-base=4.2.3 r-tidyverse r-biocmanager r-hdf5r r-devtools r-r.utils r-seurat r-signac r-leiden r-matrix r-pals r-ggsci r-ggthemes r-showtext r-ggtext r-ggpubr r-ggridges r-ggtext r-ggh4x openssl==8.2.0
 conda activate R_4.2.3
 conda install r-base=4.2.3 bioconductor-motifmatchr bioconductor-tfbstools bioconductor-chromvar bioconductor-bsgenome.hsapiens.ucsc.hg38 bioconductor-ensdb.hsapiens.v86 bioconductor-deseq2 bioconductor-limma r-harmony bioconductor-biocfilecache
+
+conda create -y -n r-reticulate -c vtraag python-igraph pandas umap-learn scanpy macs2 scvi-tools
+
 ```
 
 In the above script, we make a folder called `bin` in your work directory, and then download and install miniconda. We then use it to create our R environment named `R_4.2.3`, but you can name this whatever you want.
@@ -207,22 +217,20 @@ From here, you can customise the session you want:
 
 When you launch this, it will queue the request as it goes through the `slurm` workload manager. It will then automatically update when it is running, and you can launch the session. If it is taking too long, reduce the cores, memory, and running time. 16 cores, 64 Gb RAM, and 1 day often works well.
 
-**3.** Close the R session, and go back to your terminal. You should see two new folders in your home directory, `ondemand` and `R`. Perform these steps:
-
-```bash
-cd # change to home directory
-ls # to check where you are
-mv .config work/bin/ && ln -s $HOME/work/bin/.config .config
-mv .cache work/bin/ && ln -s $HOME/work/bin/.cache .cache
-mv .local work/bin/ && ln -s $HOME/work/bin/.local .local
-mv ondemand work/bin/ && ln -s $HOME/work/bin/ondemand ondemand
-```
-This creates symbolic links which moves certain default directories to a place where you have more space to do so.
-
-
 **5.** Finallising our R environment, we move back to ondemand, launch a session once more, and perform these steps:
+
+At the beginning of your script, you must let R know where your python environment is to use reticulate:
+
+```R
+Sys.setenv(PATH = paste('~/work/bin/miniconda3/envs/r-reticulate/lib/python3.10/site-packages/', Sys.getenv()['PATH'], sep = ':'))
+library(reticulate)
+assignInNamespace("is_conda_python", function(x){ return(FALSE) }, ns="reticulate")
+use_miniconda('~/work/bin/miniconda3/envs/r-reticulate/', required = T)
+```
+
+Then:
 
 ```R
 update.packages(ask = FALSE, checkBuilt = TRUE)
-remotes::install_github(c('satijalab/azimuth', 'satijalab/seurat-data', 'chris-mcginnis-ucsf/DoubletFinder', 'TomKellyGenetics/leiden', 'carmonalab/UCell'), force = T)
+remotes::install_github(c('satijalab/azimuth', 'satijalab/seurat-data', 'chris-mcginnis-ucsf/DoubletFinder', 'carmonalab/UCell', 'satijalab/seurat-wrappers', 'mojaveazure/seurat-disk'), force = T)
 ```

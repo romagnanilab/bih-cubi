@@ -50,20 +50,20 @@ channel_priority: flexible' > ${HOME}/.condarc
 
 fi
 
-echo -e "\033[0;33mINPUT REQUIRED:\033[0m Do you want to create R_4.2.3? (y/newname/n)" && read -r choice
+echo -e "\033[0;33mINPUT REQUIRED:\033[0m Do you want to create R_4.3.3? (y/newname/n)" && read -r choice
 
 # Validate user input
 while [[ ! $choice =~ ^[YyNn]$ && $choice != "newname" ]]; do
     echo -e "\033[0;31mERROR:\033[0m Invalid input. Please enter Y, N, or newname" && read -r choice
 done
 
-environment=$HOME/group/work/bin/source/R_4.2.3.yml
+environment=$HOME/group/work/bin/source/R_4.3.3.yml
 # Process user choice
 if [[ $choice =~ ^[Yy]$ ]]; then
     echo ""
     echo "Creating a new environment for RStudio. This might take a while..."
     echo ""
-    env_name='R_4.2.3'
+    env_name='R_4.3.3'
     conda env create -f $environment
 elif [[ $choice == "newname" ]]; then
     echo ""

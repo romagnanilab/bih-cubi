@@ -175,7 +175,7 @@ conda upgrade --all -y
 conda config --set solver libmamba
 
 # If you'd like to make a conda env now for single cell analysis in R, run these steps:  
-conda create -n R_4.3.2 r-tidyverse r-biocmanager r-hdf5r r-devtools r-r.utils r-seurat r-signac r-leiden r-matrix r-pals r-ggsci r-ggthemes r-showtext r-ggtext r-ggpubr r-ggridges r-ggtext r-ggh4x openssl==3.2.0
+conda create -y -n R_4.3.2 r-base==4.3.2 r-tidyverse r-biocmanager r-hdf5r r-devtools r-r.utils r-seurat r-signac r-leiden r-matrix r-pals r-ggsci r-ggthemes r-showtext r-ggtext r-ggpubr r-ggridges r-ggtext r-ggh4x openssl==3.1.3
 conda activate R_4.3.2
 conda install r-base=4.3.3 bioconductor-motifmatchr bioconductor-tfbstools bioconductor-chromvar bioconductor-bsgenome.hsapiens.ucsc.hg38 bioconductor-ensdb.hsapiens.v86 bioconductor-deseq2 bioconductor-limma r-harmony bioconductor-biocfilecache
 

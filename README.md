@@ -183,9 +183,9 @@ conda create -y -n r-reticulate -c vtraag python-igraph pandas umap-learn scanpy
 
 ```
 
-In the above script, we make a folder called `bin` in your work directory, and then download and install miniconda. We then use it to create our R environment named `R_4.2.3`, but you can name this whatever you want.
+In the above script, we make a folder called `bin` in your work directory, and then download and install miniconda. We then use it to create our R environment named `R_4.3.3`, but you can name this whatever you want.
 
-If at any point you come into errors installing packages through RStudio directly, try using this format while in the `R_4.2.3` conda environment: `conda install r-package`, replacing the word 'package' with what you want to install. The 'r-' prefix indicates it's an `R` package, and not a `python` one.
+If at any point you come into errors installing packages through RStudio directly, try using this format while in the `R_4.3.3` conda environment: `conda install r-package`, replacing the word 'package' with what you want to install. The 'r-' prefix indicates it's an `R` package, and not a `python` one.
 
 # Setting up an RStudio session
 In terminal, perform:  
@@ -195,7 +195,7 @@ git clone https://github.com/bihealth/ood-bih-rstudio-server.git
 nano $HOME/work/bin/ondemand/dev/ood-bih-rstudio-server/template/script.sh.erb
 
 # under export LD_LIBRARY_PATH=/usr/lib64/:\$LD_LIBRARY_PATH, add:
-export LD_PRELOAD=/fast/work/users/$USER/bin/miniconda3/envs/R_4.2.3/lib/libstdc++.so.6 
+export LD_PRELOAD=/fast/work/users/$USER/bin/miniconda3/envs/R_4.3.3/lib/libstdc++.so.6 
 # save and close with CTRL + X, Y and enter
 ```
 
@@ -207,7 +207,7 @@ From here, you can customise the session you want:
 
 ```bash
 **R source:** change to miniconda  
-**Miniconda path:** $HOME/bin/miniconda3/bin:R_4.2.3 # or whatever you named the environment to be
+**Miniconda path:** $HOME/bin/miniconda3/bin:R_4.3.3 # or whatever you named the environment to be
 **Singularity image:** *leave as is*  
 **Number of cores:** Maximum 32
 **Memory [GiB]:** Maximum 128  

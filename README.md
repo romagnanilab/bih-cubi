@@ -20,11 +20,11 @@ If you run into trouble using any part of the HPC, heres an order of where to lo
 
 # VPN access and requesting an account
 
-1. **Fill in both VPN forms, [`vpn_antrag.pdf`](https://github.com/romagnanilab/bih-cubi/blob/main/files/vpn_antrag.pdf), and [`vpn_zusatzantrag_b.pdf`](https://github.com/romagnanilab/bih-cubi/blob/main/files/vpn_zusatzantrag_b.pdf)**  
+1. **Fill in both VPN forms, [`vpn_antrag.pdf`](https://github.com/romagnanilab/bih-cubi/blob/main/files/01_VPN_antrag.pdf), and [`vpn_zusatzantrag_b.pdf`](https://github.com/romagnanilab/bih-cubi/blob/main/files/02_VPN_zusatzantrag_B.pdf)**  
 Print and sign both, then scan and send both files to to *vpn@charite.de*, cc'ing Chiara (*chiara.romagnani@charite.de*).
 
 2. **For personal computer access, install OpenVPN and configure your connection**  
-Refer to either installation on macOS ([`vpn_macOS_installation.pdf`](https://github.com/romagnanilab/bih-cubi/blob/main/files/vpn_macOS_install.pdf)) or Windows ([`vpn_Windows_installation.pdf`](https://github.com/romagnanilab/bih-cubi/blob/main/files/vpn_Windows_install.pdf)) if you run into trouble.
+Refer to either installation on macOS ([`vpn_macOS_installation.pdf`](https://github.com/romagnanilab/bih-cubi/blob/main/files/install_VPN_macOS.pdf)) or Windows ([`vpn_Windows_installation.pdf`](https://github.com/romagnanilab/bih-cubi/blob/main/files/install_VPN_windows.pdf)) if you run into trouble.
 
 If you have any issues, feel free to ask Ollie (*oliver.knight@charite.de*) for help. You can also check out the BIH-CUBI cluster guide [here](https://bihealth.github.io/bih-cluster/).
 
@@ -36,7 +36,7 @@ Please fill in the form below and forwarded to Ollie, who is the named delegate 
 - cluster: HPC 4 Research
 - first name:
 - last name:
-- affiliation: Charite, Department of Gastroenterology
+- affiliation: Charite, Institute of Medical Immunology
 - institute email: # charite e-mail
 - institute phone:
 - user has account with
@@ -74,7 +74,7 @@ d. Locate the `.ssh/id_rsa.pub` file in your file explorer and open with notepad
 
 e. Copy the contents; it should look something like  
 ```
-ssh-rsa AAAAAB3NzaC1yc2EAAAADAQABAAABAQC/Rdd5rf4BT38jsBrXpd1vjE1iZZlEmkB6809QK7hV6RCG13VcyPTIHSQePycfcUv5q1Jdy28MpacL/nv1UR/o35xPBn2HkgB4OqnKtt86soCGMd9/YzQP5lY7V60kPBJbrXDApeqf+H1GALsFNQM6MCwicdE6zTqE1mzWVdhGymZR28hGJbVsnMDDc0tW4i3FHGrDdmb7wHM9THMx6OcCrnNyA9Sh2OyBH4MwItKfuqEg2rc56D7WAQ2JcmPQZTlBAYeFL/dYYKcXmbffEpXTbYh+7O0o9RAJ7T3uOUj/2IbSnsgg6fyw0Kotcg8iHAPvb61bZGPOEWZb your_email@charite.de
+ssh-rsa AAAAAB3NzaC1yc2EAAAADAQABAAABAQC/Rdd5rf4BT38jsBrXpiZZlEmkB6809QK7hV6RCG13VcyPTIHSQePycfcUv5q1Jdy28MpacL/nv1UR/o35xPBn2HkgB4OqnKtt86soCGMd9/YzQP5lY7V60kPBJbrXDApeqf+H1GALsFNQM6MCwicdE6zTqE1mzWVdhGymZR28hGJbVsnMDDc0tW4i3FHGrDdmb7wHM9THMx6OcCrnNyA9Sh2OyBH4MwItKfuqEg2rc56D7WAQ2JcmPQZTlBAYeFL/dYYKcXmbffEpXTbYh+7O0o9RAJ7T3uOUj/2IbSnsgg6fyw0Kotcg8iHAPvb61bZGPOEWZb your_email@charite.de
 ```
 
 f. Go to https://zugang.charite.de/ and log in as normal. Click on the blue button `SSHKeys...`, paste the key from your `.ssh/id_rsa.pub` file, and click append.  
@@ -84,14 +84,14 @@ a. Type `ssh-add`
 
 b. Go to the `$HOME/.ssh/` folder and create a new text file. paste the below in, adding your username and leaving the '_c', and save, *without* a file extension.  
 ```bash
-Host bihcluster
+Host cubi
     ForwardAgent yes
     ForwardX11 yes
     HostName hpc-login-1.cubi.bihealth.org
     User username_c
     RequestTTY yes
 
-Host bihcluster2
+Host cubi
     ForwardAgent yes
     ForwardX11 yes
     HostName hpc-login-1.cubi.bihealth.org
@@ -100,7 +100,7 @@ Host bihcluster2
 ```
 
 c. Then, you can simply type `ssh bihcluster``  
-Enter the password you set during **step 2** and connect into the login node. Proceed directly to the instructions in [03_work_environment](https://github.com/romagnanilab/bih-cubi/tree/main/03_work_environment)
+Enter the password you set during **step 2** and connect into the login node. Proceed directly to the instructions in [Setting up your work environment](https://github.com/romagnanilab/bih-cubi/tree/main#setting-up-your-work-environment)
 
 </details>
 
@@ -123,10 +123,10 @@ You can detach this at any time by pressing CTRL+b, letting go, and pressing the
 Next, we will ask the workload managing system `slurm` to allocate us some cores and RAM.
 
 ```bash
-srun --time 24:00:00 --ntasks 16 --mem 32G --immediate=1200 --pty bash -i
+srun --time 48:00:00 --ntasks 16 --mem 32G --immediate=10000 --pty bash -i
 ```  
 
-This creates a session which will last 24h, allow you to use 16 CPU cores, and 32Gb RAM. From here, we can install software, packages, extract files and run programs.
+This creates a session which will last 48h, allow you to use 16 CPU cores, and 32Gb RAM. From here, we can install software, packages, extract files and run programs.
 
 **2. Setting up a workspace environment**
 
@@ -139,15 +139,14 @@ From here, how you set up your workspace is entirely your decision. However the 
 
 You can at any time check your quota with the command `bih-gpfs-quota-user $USER`
 
-Below is a set of instructions to install miniconda3, which is required to install Seurat and other R packages.
+Below is a set of instructions to install miniconda3, which is required to install Seurat and other R packages. However, you can skip this and hopefully run a command with this to get everything looking nice:
 
 ```bash
+bash /fast/work/groups/ag_romagnani/bin/first_time_setup.sh
+```
 
-mv ${HOME}/.config work/bin/ && ln -s $HOME/work/bin/.config .config
-mv ${HOME}/.cache work/bin/ && ln -s $HOME/work/bin/.cache .cache
-mv ${HOME}/.local work/bin/ && ln -s $HOME/work/bin/.local .local
-mv ${HOME}/ondemand work/bin/ && ln -s $HOME/work/bin/ondemand ondemand
 
+```bash
 # link the group folder, and set up your work/bin/ folder
 ln -s /fast/work/groups/ag_romagnani/ group
 mkdir $HOME/work/bin/ && cd $HOME/work/bin/
@@ -168,14 +167,15 @@ channels:
   - defaults
 show_channel_urls: true
 changeps1: true
-channel_priority: flexible
+channel_priority: strict
 # close by CTRL+X and y and enter
 
 conda upgrade --all -y
 conda config --set solver libmamba
+echo "source ${bin_folder}/miniconda3/etc/profile.d/conda.sh" >> ${HOME}/.bashrc
 
 # If you'd like to make a conda env now for single cell analysis in R, run these steps:  
-conda create -y -n R_4.3.2 r-base==4.3.2 r-tidyverse r-biocmanager r-hdf5r r-devtools r-r.utils r-seurat r-signac r-leiden r-matrix r-pals r-ggsci r-ggthemes r-showtext r-ggtext r-ggpubr r-ggridges r-ggtext r-ggh4x openssl==3.1.3
+conda create -y -n R_4.3.2 r-base==4.3.3 r-tidyverse r-biocmanager r-hdf5r r-devtools r-r.utils r-seurat r-signac r-leiden r-matrix r-pals r-ggsci r-ggthemes r-showtext r-ggtext r-ggpubr r-ggridges r-ggtext r-ggh4x openssl==3.1.3
 conda activate R_4.3.2
 conda install r-base=4.3.2 bioconductor-motifmatchr bioconductor-tfbstools bioconductor-chromvar bioconductor-bsgenome.hsapiens.ucsc.hg38 bioconductor-ensdb.hsapiens.v86 bioconductor-deseq2 bioconductor-limma r-harmony bioconductor-biocfilecache openssl==3.1.3
 
@@ -183,21 +183,11 @@ conda create -y -n r-reticulate -c vtraag python-igraph pandas umap-learn scanpy
 
 ```
 
-In the above script, we make a folder called `bin` in your work directory, and then download and install miniconda. We then use it to create our R environment named `R_4.3.2`, but you can name this whatever you want.
+In the above script, we make a folder called `bin` in your work directory, and then download and install miniconda. We then use it to create our R environment named `R_4.3.3`, but you can name this whatever you want.
 
-If at any point you come into errors installing packages through RStudio directly, try using this format while in the `R_4.3.2` conda environment: `conda install r-package`, replacing the word 'package' with what you want to install. The 'r-' prefix indicates it's an `R` package, and not a `python` one.
+If at any point you come into errors installing packages through RStudio directly, try using this format while in the `R_4.3.3` conda environment: `conda install r-package`, replacing the word 'package' with what you want to install. The 'r-' prefix indicates it's an `R` package, and not a `python` one.
 
 # Setting up an RStudio session
-In terminal, perform:  
-```bash
-mkdir -p $HOME/work/bin/ondemand/dev && cd $HOME/work/bin/ondemand/dev
-git clone https://github.com/bihealth/ood-bih-rstudio-server.git
-nano $HOME/work/bin/ondemand/dev/ood-bih-rstudio-server/template/script.sh.erb
-
-# under export LD_LIBRARY_PATH=/usr/lib64/:\$LD_LIBRARY_PATH, add:
-export LD_PRELOAD=/fast/work/users/$USER/bin/miniconda3/envs/R_4.3.2/lib/libstdc++.so.6 
-# save and close with CTRL + X, Y and enter
-```
 
 **1. Navigate to [this page](https://hpc-portal.cubi.bihealth.org/pun/sys/dashboard/).** You must be connected to the Charite VPN to access this page
 
@@ -207,8 +197,8 @@ From here, you can customise the session you want:
 
 ```bash
 **R source:** change to miniconda  
-**Miniconda path:** $HOME/bin/miniconda3/bin:R_4.3.2 # or whatever you named the environment to be
-**Singularity image:** *leave as is*  
+**Miniconda path:** $HOME/bin/miniconda3/bin:R_4.3.3 # or whatever you named the environment to be
+**Apptainer image:** *leave as is*  
 **Number of cores:** Maximum 32
 **Memory [GiB]:** Maximum 128  
 **Running time [days]:** Maximum 14, recommended 1  
@@ -224,11 +214,11 @@ At the beginning of your script, you must let R know where your python environme
 ```R
 Sys.setenv(PATH = paste('~/work/bin/miniconda3/envs/r-reticulate/lib/python3.10/site-packages/', Sys.getenv()['PATH'], sep = ':'))
 library(reticulate)
-assignInNamespace("is_conda_python", function(x){ return(FALSE) }, ns="reticulate")
+assignInNamespace('is_conda_python', function(x){ return(FALSE) }, ns = 'reticulate')
 use_miniconda('~/work/bin/miniconda3/envs/r-reticulate/', required = T)
 ```
 
-Then:
+Then install some extra packages...
 
 ```R
 update.packages(ask = FALSE, checkBuilt = TRUE)
